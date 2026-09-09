@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 const Box3D = dynamic(() => import('./Box3D'), { ssr: false });
+import { payWithUsdc } from '../lib/wallet';
 
 const RCOL = { common:'#7A8299', uncommon:'#3FE0A8', rare:'#4E8BFF', epic:'#A46BFF', legendary:'#FFC24A', mythic:'#FF4423', relic:'#EDE6DC' };
 const RDUR = { common:800, uncommon:900, rare:1100, epic:1600, legendary:2200, mythic:3000, relic:3400 };
@@ -33,6 +34,26 @@ export default function BoxStore({ boxes, rarities, openingFromUrl }) {
     else setStatus(`Seed committed (${d.serverSeedHash.slice(0, 12)}…). Checkout is not connected on this deployment yet.`);
   }
 
+  async function buyUsdc() {
+    try {
+      const clientSeed = crypto.getRandomValues(new Uint32Array(4)).join('-');
+      const r = await payWithUsdc({
+        onStatus: setStatus,
+        quoteFor: async (buyer) => {
+          const q = await fetch('/api/checkout/quote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ boxId: sel.id, buyer, clientSeed }) });
+          const d = await q.json();
+          if (!q.ok) { if (d.needsVerification) window.location.href = '/verify'; throw new Error(d.error ?? 'quote failed'); }
+          return d;
+        }
+      });
+      setStatus('Confirming on-chain');
+      const c = await fetch('/api/checkout/confirm', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ txHash: r.hash, orderDbId: r.orderDbId }) });
+      const cd = await c.json();
+      if (!c.ok) throw new Error(cd.error ?? 'confirm failed');
+      await openNow(r.openingId);
+    } catch (e) { setStatus(e.message); setPhase('idle'); }
+  }
+
   async function openNow(openingId) {
     setResult(null); setRevealed([]); setPhase('idle'); setStatus('Hold to open');
     // ritual: hold for 2s
@@ -54,7 +75,12 @@ export default function BoxStore({ boxes, rarities, openingFromUrl }) {
         <Box3D color={sel?.color} glow={sel?.glow} phase={phase} charge={charge} height={380} />
         <div className="bx__name"><span className="eyebrow" style={{color:'var(--bx)'}}>{sel?.name}</span><b>${((sel?.price_usd_cents ?? 0) / 100).toLocaleString()}</b></div>
         {status && <p className="bx__status">{status}</p>}
-        {!result && phase === 'idle' && sel && <button className="btn btn--heat" onClick={buy} style={{cursor:'pointer',border:'none'}}>Buy and open</button>}
+        {!result && phase === 'idle' && sel && (
+          <div className="hero__acts" style={{justifyContent:'center'}}>
+            <button className="btn btn--heat" onClick={buyUsdc} style={{cursor:'pointer',border:'none'}}>Pay with USDC</button>
+            <button className="btn btn--ghost" onClick={buy} style={{cursor:'pointer'}}>Pay by card</button>
+          </div>
+        )}
         {result && (
           <>
             <div className="cards">
