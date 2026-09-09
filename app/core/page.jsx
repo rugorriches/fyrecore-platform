@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { createClient, isSupabaseConfigured } from '../../lib/supabase/server';
+import LinkWallet from '../../components/LinkWallet';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Your Core' };
@@ -14,7 +15,7 @@ export default async function Core() {
 
   const [{ data: profile }, { data: core }, { data: balances }, { data: quests }, { data: done }, { data: orders }, { data: inv }] =
     await Promise.all([
-      supabase.from('profiles').select('handle, founder_tier').eq('id', user.id).single(),
+      supabase.from('profiles').select('handle, founder_tier, wallet_address').eq('id', user.id).single(),
       supabase.from('cores').select('*').eq('user_id', user.id).single(),
       supabase.from('embers_balances').select('season_id, balance'),
       supabase.from('quests').select('*').eq('active', true).order('id'),
@@ -69,6 +70,10 @@ export default async function Core() {
           ))}
         </tbody>
       </table></div>
+
+      <div className="head" style={{marginTop:'4rem'}}><h2>Wallet</h2>
+        <p>The wallet your prize money, marketplace sales and Vault redemptions are paid to. You keep the keys; we only store the address. Linking is a signature, not a transaction.</p></div>
+      <LinkWallet current={profile?.wallet_address ?? null} />
 
       <div className="head" style={{marginTop:'4rem'}}><h2>Purchases</h2>
         <p>Everything you have bought, each with the on-chain transaction that paid for it.</p></div>

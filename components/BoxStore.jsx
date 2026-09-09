@@ -64,7 +64,7 @@ export default function BoxStore({ boxes, rarities, openingFromUrl }) {
         {!result && phase === 'idle' && sel && (
           <div className="hero__acts" style={{justifyContent:'center', flexDirection:'column', alignItems:'center', gap:'.5rem'}}>
             <button className="btn btn--heat" onClick={buyUsdc} style={{cursor:'pointer',border:'none'}}>Pay with USDC on Base</button>
-            <small style={{color:'var(--steel)', fontSize:'.78rem'}}>Coinbase Wallet, MetaMask or Rabby. Price is exact, no markup. <a href="/faq#usdc">How to get USDC on Base</a></small>
+            <small style={{color:'var(--steel)', fontSize:'.78rem'}}>MetaMask, Rabby, or any WalletConnect wallet. Price is exact, no markup. <a href="/faq#usdc">How to get USDC on Base</a></small>
           </div>
         )}
         {result && (

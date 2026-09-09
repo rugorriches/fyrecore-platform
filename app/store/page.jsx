@@ -64,7 +64,7 @@ export default async function Store() {
       {orphan.length > 0 && (<div><div className="head head--wide" style={{marginTop:'3rem'}}><h2 style={{fontSize:'var(--s2)'}}>Platform</h2></div><Grid items={orphan} /></div>)}
 
       <div className="note" style={{marginTop:'3rem'}} id="usdc">
-        <p><strong>Paying in USDC on Base.</strong> You need a wallet (Coinbase Wallet is the simplest) holding USDC on the Base network, plus a few cents of ETH on Base for gas. Coinbase lets you buy USDC and send it to Base directly. The first purchase asks for two wallet confirmations &mdash; one approval, one payment; after that, one. We never see your keys, and the contract only accepts a price our server signed for that exact order.</p>
+        <p><strong>Paying in USDC on Base.</strong> You need a wallet you control &mdash; MetaMask, Rabby, or any WalletConnect wallet on your phone &mdash; holding USDC on the Base network, plus a few cents of ETH on Base for gas. Any exchange that supports Base withdrawals can send USDC there directly. The first purchase asks for two wallet confirmations &mdash; one approval, one payment; after that, one. We never see your keys, and the contract only accepts a price our server signed for that exact order.</p>
       </div>
     </div></section>
   );
