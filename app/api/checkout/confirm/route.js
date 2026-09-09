@@ -48,7 +48,9 @@ export async function POST(req) {
     for (const tag of sku?.asset_tags ?? []) await admin.from('entitlements').upsert({ user_id: user.id, sku_id: order.sku_id, asset_tag: tag, order_id: orderDbId }, { onConflict: 'user_id,asset_tag' });
     await admin.from('orders').update({ state: 'fulfilled', fulfilled_tx: txHash }).eq('id', orderDbId);
   }
-  await admin.from('treasury_ledger').insert({ category: 'cosmetic_sale', amount_usd: order.price_usd_cents / 100, note: `usdc ${txHash}` });
+  const { data: skuRow } = await admin.from('skus').select('kind').eq('id', order.sku_id).single();
+  const category = order.opening_id ? 'box_sale' : skuRow?.kind === 'pass' ? 'pass_sale' : 'cosmetic_sale';
+  await admin.from('treasury_ledger').insert({ category, amount_usd: order.price_usd_cents / 100, note: `usdc ${txHash}` });
 
   return NextResponse.json({ ok: true, state: order.opening_id ? 'paid' : 'fulfilled', openingId: order.opening_id });
 }

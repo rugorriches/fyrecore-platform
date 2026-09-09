@@ -30,6 +30,9 @@ export async function POST(req) {
   if (!/^0x[0-9a-fA-F]{40}$/.test(buyer)) return NextResponse.json({ error: 'buyer address required' }, { status: 400 });
 
   const admin = createAdminClient();
+  // Throttle unpaid quotes: each one is an order row (and for boxes a seed commit). 20 per 10 minutes is generous for a human.
+  const { count: recent } = await admin.from('orders').select('id', { count: 'exact', head: true }).eq('user_id', user.id).eq('state', 'quoted').gte('created_at', new Date(Date.now() - 600_000).toISOString());
+  if ((recent ?? 0) >= 20) return NextResponse.json({ error: 'too many open quotes — try again in a few minutes' }, { status: 429 });
   let sku;
   if (boxId) {
     const gate = await checkAccess(user.id, 'random_boxes');
@@ -43,6 +46,8 @@ export async function POST(req) {
   if (!sku) return NextResponse.json({ error: 'unknown sku' }, { status: 404 });
   // Boxes are only sold through the box path (seed commit + box gate). Never as a bare SKU.
   if (!boxId && sku.kind === 'box') return NextResponse.json({ error: 'boxes are bought from /boxes' }, { status: 400 });
+  // Tournament entries are escrowed by PrizeEscrow, not sold as SKUs. Refuse until that contract is deployed and wired.
+  if (sku.kind === 'entry' && !process.env.NEXT_PUBLIC_PRIZE_ESCROW_ADDRESS) return NextResponse.json({ error: 'paid brackets open when prize escrow is live' }, { status: 503 });
   if (sku.supply_cap != null && (sku.sold ?? 0) + qty > sku.supply_cap) return NextResponse.json({ error: 'sold out' }, { status: 409 });
 
   // Box: commit to a server seed and publish its hash BEFORE any money moves.

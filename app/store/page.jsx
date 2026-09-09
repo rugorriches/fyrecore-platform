@@ -19,7 +19,7 @@ export default async function Store() {
       s.from('games').select('id, name, slug, section').eq('section', 'fyrecore'),
       s.auth.getUser()
     ]);
-    skus = k ?? []; games = g ?? [];
+    skus = (k ?? []).filter(x => x.kind !== 'entry' || process.env.NEXT_PUBLIC_PRIZE_ESCROW_ADDRESS); games = g ?? [];
     if (user) { const { data: e } = await s.from('entitlements').select('sku_id'); owned = new Set((e ?? []).map(x => x.sku_id)); }
   }
   const byGame = games.map(g => ({ g, items: skus.filter(x => x.game_id === g.id) })).filter(x => x.items.length);
