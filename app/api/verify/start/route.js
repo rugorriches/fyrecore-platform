@@ -24,10 +24,11 @@ export async function POST() {
   if (existing?.status === 'approved') return NextResponse.json({ status: 'approved' });
 
   const site = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.fyrecore.app';
-  const res = await fetch('https://verification.didit.me/v2/session/', {
+  // v3 Sessions API. Idempotent server-side: one unfinished session per (workflow_id, vendor_data).
+  const res = await fetch('https://verification.didit.me/v3/session/', {
     method: 'POST',
     headers: { 'x-api-key': apiKey, 'content-type': 'application/json' },
-    body: JSON.stringify({ workflow_id: workflow, vendor_data: user.id, callback: `${site}/verify?done=1` })
+    body: JSON.stringify({ workflow_id: workflow, vendor_data: user.id, callback: `${site}/verify?done=1`, callback_method: 'both' })
   });
   if (!res.ok) return NextResponse.json({ error: 'provider error', detail: await res.text() }, { status: 502 });
   const session = await res.json();

@@ -6,7 +6,7 @@ export default function Economy(){
       <div className="head head--wide">
         <span className="eyebrow">How money moves here</span>
         <h2>No token. Prize money is money.</h2>
-        <p>Entry fees, prize pools and payouts are in USDC. Passes and cosmetics are bought with a card. FyreCore does not issue a currency, and there is nothing here to speculate on.</p>
+        <p>Everything settles in USDC on Base: entry fees, prize pools, passes, cosmetics, marketplace trades and Vault redemptions. FyreCore does not issue a currency and does not take cards, and there is nothing here to speculate on.</p>
       </div>
 
       <div className="note note--warn" style={{marginBottom:'2.5rem'}}>
@@ -16,10 +16,11 @@ export default function Economy(){
       <div className="tblwrap" style={{marginBottom:'4rem'}}><table className="tbl">
         <thead><tr><th>What</th><th>Paid in</th><th>Who receives it</th></tr></thead>
         <tbody>
-          <tr><td><b>Tournament entry</b></td><td>USDC or card</td><td>Escrowed, then the winners</td></tr>
+          <tr><td><b>Tournament entry</b></td><td>USDC</td><td>Escrowed, then the winners</td></tr>
           <tr><td><b>Prize pools</b></td><td>USDC</td><td>Placings, paid at the final</td></tr>
-          <tr><td><b>Founder&rsquo;s Pass</b></td><td>Card</td><td>FyreCore &mdash; funds art and prize seeding</td></tr>
-          <tr><td><b>Cosmetics</b></td><td>Card, USDC, OMENX or GMT</td><td>FyreCore, or 70% to the creator</td></tr>
+          <tr><td><b>Founder&rsquo;s Pass</b></td><td>USDC</td><td>FyreCore &mdash; funds art and prize seeding</td></tr>
+          <tr><td><b>Cosmetics and packs</b></td><td>USDC</td><td>FyreCore, or 70% to the creator</td></tr>
+          <tr><td><b>Random boxes</b></td><td>USDC</td><td>FyreCore &mdash; drops are bound and never cash out</td></tr>
           <tr><td><b>Marketplace sale</b></td><td>USDC</td><td>Seller, minus a 5% fee</td></tr>
           <tr><td><b>Embers</b></td><td>Earned only</td><td>You &mdash; not transferable, not for sale</td></tr>
         </tbody>

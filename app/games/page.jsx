@@ -11,8 +11,8 @@ export default async function Games(){
     <section className="section"><div className="wrap">
       <div className="head head--wide">
         <span className="eyebrow">FyreCore titles</span>
-        <h2>Our games, our rails, any currency.</h2>
-        <p>Built and owned by FyreCore. Priced in dollars. Pay with a card, USDC, OMENX or GMT &mdash; the price is the same whichever you choose. No token of ours, no wallet required to play.</p>
+        <h2>Our games, our rails, settled in USDC.</h2>
+        <p>Built and owned by FyreCore. Priced in dollars and paid in USDC on Base at exactly that amount, from a wallet you control. No token of ours, no wallet required to play.</p>
       </div>
 
       <div className="ggrid">{games.map((g, i) => <GameCard g={g} i={i} key={g.slug} />)}</div>

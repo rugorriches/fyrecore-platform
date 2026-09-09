@@ -22,7 +22,7 @@ export default function CollectionCard({ c, i = 0 }) {
         <p className="ncard__rule">
           {omen
             ? 'Minted into OMEN contracts. Priced and traded in OMENX and GMT under OMEN rules. FyreCore does not own this contract.'
-            : 'Minted on FyreCore contracts. Priced in USD; pay by card, USDC, OMENX or GMT. Cosmetic and access only — no yield.'}
+            : 'Minted on FyreCore contracts. Priced in USD, paid in USDC on Base. Cosmetic and access only — no yield.'}
         </p>
       </div>
     </article>

@@ -7,7 +7,8 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 /**
- * Open a paid box. Requires the order to be 'paid' (set by the Stripe webhook).
+ * Open a paid box. Requires the order to be 'paid', which only /api/checkout/confirm sets,
+ * and only after reading a Purchase event from OUR contract off the on-chain receipt.
  * Rolls, applies pity, writes bound inventory, converts duplicates to Embers,
  * then reveals the server seed so the roll can be recomputed by anyone.
  */

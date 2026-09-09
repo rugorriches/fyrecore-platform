@@ -12,27 +12,12 @@ export default function BoxStore({ boxes, rarities, openingFromUrl }) {
   const [phase, setPhase] = useState('idle');       // idle | charge | crack | open
   const [charge, setCharge] = useState(0);
   const [status, setStatus] = useState(null);       // text under the box
-  const [quote, setQuote] = useState(null);
   const [result, setResult] = useState(null);
   const [revealed, setRevealed] = useState([]);
   const holdRef = useRef(null);
 
-  // Returning from Stripe with ?opening=ID -> open it
+  // Returning with ?opening=ID (paid on-chain, not yet opened — e.g. after a mobile wallet round-trip) -> open it
   useEffect(() => { if (openingFromUrl) { const b = boxes.find(x => x.id === openingFromUrl.boxId) ?? sel; if (b) setSel(b); openNow(openingFromUrl.id); } }, [openingFromUrl]); // eslint-disable-line
-
-  async function buy() {
-    setStatus('Committing to a seed…');
-    const clientSeed = crypto.getRandomValues(new Uint32Array(4)).join('-');
-    const r = await fetch('/api/boxes/quote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ boxId: sel.id, clientSeed }) });
-    const d = await r.json();
-    if (!r.ok) {
-      if (d.needsVerification) { setStatus('Verification required — one-time, about two minutes.'); window.location.href = '/verify'; return; }
-      setStatus(d.error ?? 'Could not quote'); return;
-    }
-    setQuote(d);
-    if (d.checkoutUrl) { setStatus('Seed committed. Sending you to checkout…'); window.location.href = d.checkoutUrl; }
-    else setStatus(`Seed committed (${d.serverSeedHash.slice(0, 12)}…). Checkout is not connected on this deployment yet.`);
-  }
 
   async function buyUsdc() {
     try {
@@ -46,6 +31,7 @@ export default function BoxStore({ boxes, rarities, openingFromUrl }) {
           return d;
         }
       });
+      if (!r) return;                                   // handed off to a mobile wallet browser
       setStatus('Confirming on-chain');
       const c = await fetch('/api/checkout/confirm', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ txHash: r.hash, orderDbId: r.orderDbId }) });
       const cd = await c.json();
@@ -76,9 +62,9 @@ export default function BoxStore({ boxes, rarities, openingFromUrl }) {
         <div className="bx__name"><span className="eyebrow" style={{color:'var(--bx)'}}>{sel?.name}</span><b>${((sel?.price_usd_cents ?? 0) / 100).toLocaleString()}</b></div>
         {status && <p className="bx__status">{status}</p>}
         {!result && phase === 'idle' && sel && (
-          <div className="hero__acts" style={{justifyContent:'center'}}>
-            <button className="btn btn--heat" onClick={buyUsdc} style={{cursor:'pointer',border:'none'}}>Pay with USDC</button>
-            <button className="btn btn--ghost" onClick={buy} style={{cursor:'pointer'}}>Pay by card</button>
+          <div className="hero__acts" style={{justifyContent:'center', flexDirection:'column', alignItems:'center', gap:'.5rem'}}>
+            <button className="btn btn--heat" onClick={buyUsdc} style={{cursor:'pointer',border:'none'}}>Pay with USDC on Base</button>
+            <small style={{color:'var(--steel)', fontSize:'.78rem'}}>Coinbase Wallet, MetaMask or Rabby. Price is exact, no markup. <a href="/faq#usdc">How to get USDC on Base</a></small>
           </div>
         )}
         {result && (

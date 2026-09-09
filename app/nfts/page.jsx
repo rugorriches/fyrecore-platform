@@ -12,7 +12,7 @@ export default async function NFTs(){
       <div className="head head--wide">
         <span className="eyebrow">Collections</span>
         <h2>Two tiers. One storefront.</h2>
-        <p>FyreCore-tier collections live on contracts we own, priced in dollars, paid in whatever you have. OMEN-tier collections live on OMEN&rsquo;s contracts under OMEN&rsquo;s rules. Both are shown here; only one is ours.</p>
+        <p>FyreCore-tier collections live on contracts we own, priced in dollars and paid in USDC on Base. OMEN-tier collections live on OMEN&rsquo;s contracts under OMEN&rsquo;s rules. Both are shown here; only one is ours.</p>
       </div>
 
       <div className="tiers2">
@@ -20,7 +20,7 @@ export default async function NFTs(){
           <span className="eyebrow">FyreCore tier</span>
           <ul className="rulelist">
             <li>Our contracts on Base. We set supply, metadata and royalties.</li>
-            <li>Priced in USD from a few dollars to four figures. Pay by card, USDC, OMENX or GMT at the live rate.</li>
+            <li>Priced in USD from a few dollars to four figures. Paid in USDC on Base at exactly that amount.</li>
             <li>Cosmetic and access only. No yield, no revenue share, no rewards.</li>
             <li>Fixed pack contents. Random boxes exist separately and their drops are bound, never sellable.</li>
             <li>Redeemable through the Vault at a published USD floor.</li>

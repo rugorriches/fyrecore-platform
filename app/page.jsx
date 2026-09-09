@@ -120,7 +120,7 @@ export default function Home(){
             <Link href="/games" className="slot"><h3>Warfront</h3><span>Tactical war</span><em>FyreCore &middot; concept</em></Link>
           </div>
           <div className="split" style={{marginTop:'1.1rem'}}>
-            <div className="split__panel"><span className="eyebrow">FyreCore titles</span><h3>Our rails, any currency</h3><p>Built and owned by us. Priced in dollars; pay by card, USDC, OMENX or GMT. No token, no wallet needed to play.</p><Link href="/games" className="btn btn--ghost">FyreCore games</Link></div>
+            <div className="split__panel"><span className="eyebrow">FyreCore titles</span><h3>Our rails, USDC settled</h3><p>Built and owned by us. Priced in dollars, paid in USDC on Base at exactly that amount. No token of ours, and no wallet needed to play.</p><Link href="/games" className="btn btn--ghost">FyreCore games</Link></div>
             <div className="split__panel split__panel--dim"><span className="eyebrow eyebrow--omen">OMEN titles</span><h3>Built on OMEN, by OMEN rules</h3><p>Run on the OMEN platform in OMENX and GMT, with items on OMEN contracts. We are an independent developer there.</p><Link href="/omen" className="btn btn--ghost">OMEN games</Link></div>
           </div>
         </div>

@@ -41,6 +41,7 @@ export async function POST(req) {
   if (idem) return NextResponse.json({ ok: true, duplicate: true });
 
   await admin.from('orders').update({ state: 'paid', tx_hash: txHash, updated_at: new Date().toISOString() }).eq('id', orderDbId);
+  await admin.rpc('fn_sku_sold', { p_sku: order.sku_id, p_qty: order.qty }).then(() => {}, () => {});
 
   if (!order.opening_id) {
     const { data: sku } = await admin.from('skus').select('asset_tags').eq('id', order.sku_id).single();

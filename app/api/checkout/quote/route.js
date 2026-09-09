@@ -41,8 +41,11 @@ export async function POST(req) {
     const { data: s } = await admin.from('skus').select('*').eq('id', skuId).eq('active', true).single(); sku = s;
   }
   if (!sku) return NextResponse.json({ error: 'unknown sku' }, { status: 404 });
+  // Boxes are only sold through the box path (seed commit + box gate). Never as a bare SKU.
+  if (!boxId && sku.kind === 'box') return NextResponse.json({ error: 'boxes are bought from /boxes' }, { status: 400 });
+  if (sku.supply_cap != null && (sku.sold ?? 0) + qty > sku.supply_cap) return NextResponse.json({ error: 'sold out' }, { status: 409 });
 
-  // Box: commit to a seed before payment, as with Stripe.
+  // Box: commit to a server seed and publish its hash BEFORE any money moves.
   let openingId = null;
   if (boxId) {
     const clientSeed = String(body?.clientSeed ?? '').slice(0, 64) || 'usdc';
