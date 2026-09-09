@@ -19,8 +19,8 @@ export default function Legal(){
       <p>FyreCore-section titles run on contracts and rails we own. OMEN-section titles are built by the same developer on the OMEN platform and use OMEN currencies and OMEN contracts. FyreCore is an independent third-party developer on that platform with no ownership stake in it. The two economies are unconnected, and nothing transfers between them.</p>
       <h3>Tournaments</h3>
       <p>Paid brackets are skill-based competition. Entry fees are escrowed on-chain before the first match and the platform rake is fixed and visible when a bracket is created. If a bracket is cancelled or not settled by its refund deadline, entrants may reclaim their entry fee directly from the contract without our involvement. Paid entry is unavailable where local law restricts it.</p>
-      <h3>Item packs</h3>
-      <p>Vault packs have fixed, published contents. There is no randomized pack, no loot box, and no gambling mechanic anywhere in the platform.</p>
+      <h3>Packs and boxes</h3>
+      <p>Vault packs have fixed, published contents and their items are tradeable and redeemable. Random boxes drop cosmetic items only; those items are bound to the purchasing account and can never be sold, traded, or redeemed for any currency, and duplicates convert only to non-transferable Embers. Odds are published for every box. Boxes require age and identity verification and are not offered in jurisdictions that prohibit them, including Belgium and the Netherlands. No purchase affects gameplay.</p>
       <h3 id="privacy">Privacy</h3>
       <p>We collect what is needed to run an account and stop fraud: an email address, a handle, gameplay records, and hashed device and network signals used to detect multi-accounting. Payment details are handled by our payment processor and never reach our servers. We do not sell personal data. You can request deletion of your account and personal data at any time; on-chain records cannot be deleted because we do not control the chain.</p>
       <h3>Risks worth stating plainly</h3>

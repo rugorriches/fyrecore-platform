@@ -11,8 +11,8 @@ const offer = [
     d:'Entry fees are escrowed on-chain before the first match and paid in stablecoin at the final. The rake is capped at 10% in the contract, and you can reclaim your fee yourself if we never settle.',
     a:['USDC payouts','10% rake ceiling','Permissionless refunds'], href:'/arena', cta:'Enter the Arena' },
   { k:'04', t:'Items with a floor you can check',
-    d:'Trade cosmetics with other players. Every listing shows a redemption value read live from the Vault, and nothing can be listed below it. Fixed pack contents, so no loot boxes anywhere.',
-    a:['USD floor','No loot boxes','Creators keep 70%'], href:'/economy#vault', cta:'See the Vault' }
+    d:'Trade cosmetics with other players. Every listing shows a redemption value read live from the Vault, and nothing can be listed below it. Packs are fixed; box drops are bound and never cash out.',
+    a:['USD floor','Bound box drops','Creators keep 70%'], href:'/economy#vault', cta:'See the Vault' }
 ];
 
 export default function Offer(){

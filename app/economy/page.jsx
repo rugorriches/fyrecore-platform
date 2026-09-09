@@ -37,7 +37,7 @@ export default function Economy(){
       <div className="head head--wide" style={{marginTop:'4rem'}} id="vault"><h2>The Vault still sets a floor</h2>
         <p>The floor mechanic never needed a token &mdash; it needed a unit of account. That unit is now the dollar.</p></div>
       <div className="flow">
-        <div className="flow__row"><span className="flow__key">Buy</span><p>A cosmetic pack has fixed, published contents at a fixed price. Nothing is randomized: a random-contents pack is a loot box, and loot boxes carry gambling exposure in several US states.</p></div>
+        <div className="flow__row"><span className="flow__key">Buy</span><p>A cosmetic pack has fixed, published contents at a fixed price, and those items can be traded and redeemed. Random boxes are a separate thing: their drops are cosmetic, bound to your account, and can never be sold or redeemed. Random contents or cash-out, never both on the same item.</p></div>
         <div className="flow__row"><span className="flow__key">Redeem</span><p>Return a pack&rsquo;s items and receive USDC back, minus a fee. Items used in rated play redeem at a lower fee than items that sat untouched in an inventory.</p></div>
         <div className="flow__row flow__row--out"><span className="flow__key">Floor</span><p>Every marketplace listing shows its redemption value, and nothing can be listed below it. The reserve backing those redemptions is held, not spent.</p></div>
       </div>

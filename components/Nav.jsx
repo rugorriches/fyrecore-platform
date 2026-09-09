@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Mark from './Mark';
 
 const links = [
-  ['/games', 'Games'], ['/omen', 'OMEN'], ['/nfts', 'NFTs'], ['/arena', 'Arena'],
+  ['/games', 'Games'], ['/omen', 'OMEN'], ['/nfts', 'NFTs'], ['/boxes', 'Boxes'], ['/arena', 'Arena'],
   ['/economy', 'Economy'], ['/ledger', 'Ledger'], ['/dev', 'Developers'],
   ['/faq', 'FAQ'], ['/roadmap', 'Roadmap']
 ];

@@ -55,7 +55,7 @@ export default function Home(){
             <div key={n} style={{display:'flex',gap:'3rem'}}>
               <span>No token</span><span>USDC prize pools</span>
               <span>On-chain prize escrow</span><span>Redeemable item floor</span>
-              <span>No loot boxes</span><span>Public revenue ledger</span>
+              <span>Box drops never cash out</span><span>Public revenue ledger</span>
               <span>Any currency accepted</span>
             </div>
           ))}

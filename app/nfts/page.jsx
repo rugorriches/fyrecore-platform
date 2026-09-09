@@ -22,7 +22,7 @@ export default async function NFTs(){
             <li>Our contracts on Base. We set supply, metadata and royalties.</li>
             <li>Priced in USD from a few dollars to four figures. Pay by card, USDC, OMENX or GMT at the live rate.</li>
             <li>Cosmetic and access only. No yield, no revenue share, no rewards.</li>
-            <li>Fixed pack contents. No randomised drops.</li>
+            <li>Fixed pack contents. Random boxes exist separately and their drops are bound, never sellable.</li>
             <li>Redeemable through the Vault at a published USD floor.</li>
           </ul>
         </div>
