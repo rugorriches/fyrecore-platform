@@ -1,25 +1,38 @@
-export const metadata = { title: 'Games' };
+import Link from 'next/link';
+import { getGames } from '../../lib/data';
+import GameCard from '../../components/GameCard';
 
-export default function Games(){
+export const metadata = { title: 'FyreCore Games' };
+export const revalidate = 300;
+
+export default async function Games(){
+  const games = await getGames('fyrecore');
   return (
     <section className="section"><div className="wrap">
-      <div className="head"><h2>Games</h2><p>Every title is first-party. We ship one, prove the platform on it, then build the next. Dates go on this page only when a build exists.</p></div>
-      <div className="roster" style={{marginBottom:'3rem'}}>
-        <div className="slot"><h3>Ascension</h3><span>Anime arena fighter</span><em>Playable build</em></div>
-        <div className="slot"><h3>Warfront</h3><span>Tactical war</span><em>Concept</em></div>
-        <div className="slot"><h3>Breachpoint</h3><span>First-person shooter</span><em>Concept</em></div>
-        <div className="slot"><h3>Ashlands</h3><span>Open world</span><em>Concept</em></div>
+      <div className="head head--wide">
+        <span className="eyebrow">FyreCore titles</span>
+        <h2>Our games, our rails, any currency.</h2>
+        <p>Built and owned by FyreCore. Priced in dollars. Pay with a card, USDC, OMENX or GMT &mdash; the price is the same whichever you choose. No token of ours, no wallet required to play.</p>
       </div>
-      <div className="head"><h2>Ascension</h2><p>An original anime arena fighter. Every mesh, shader, particle and sound is generated in code &mdash; there are no external assets. It runs in a browser with no install.</p></div>
-      <div className="tblwrap"><table className="tbl"><tbody>
-        <tr><th>Stack</th><td>Vite, TypeScript, Three.js. Custom 60 Hz fixed-timestep simulation, no physics engine.</td></tr>
-        <tr><th>Roster</th><td>20 data-driven characters across rushdown, heavy, speed, zoner, glass, defender and aerial archetypes</td></tr>
-        <tr><th>Stages</th><td>Five, each with its own shader palette, prop style, lighting, and a seeded music track</td></tr>
-        <tr><th>Combat</th><td>Frame-data driven: chains, special cancels, jump-cancel launchers, air tech, damage scaling, chip that cannot kill</td></tr>
-        <tr><th>Replays</th><td>Input-only and deterministic, verified against a state hash on playback. This is the prerequisite for rollback netcode.</td></tr>
-        <tr><th>Honest limits</th><td>Balance is machine-tuned, not human-tuned. No netcode yet. Animation is procedural rather than hand-authored.</td></tr>
-      </tbody></table></div>
-      <div className="note" style={{marginTop:'2.5rem'}}><p>Warfront, Breachpoint, and Ashlands are designed but not in production. They exist here so you can see where the Core is going, not as a promise of a release date.</p></div>
+
+      <div className="ggrid">{games.map((g, i) => <GameCard g={g} i={i} key={g.slug} />)}</div>
+
+      <div className="split" style={{marginTop:'4rem'}}>
+        <div className="split__panel">
+          <span className="eyebrow">Ascension, up close</span>
+          <h3>An original anime arena fighter</h3>
+          <p>Every mesh, shader, particle and sound is generated in code. No external assets. Twenty data-driven characters across rushdown, heavy, speed, zoner, glass, defender and aerial archetypes. Five stages with their own palette and seeded music. Frame-data combat with chains, special cancels, air tech and chip that cannot kill.</p>
+          <p>Replays are input-only and deterministic, verified against a state hash. That is the prerequisite for rollback netcode, which is the next thing being built.</p>
+          <ul className="chips"><li>20 characters</li><li>5 stages</li><li>60 Hz fixed-step sim</li><li>Deterministic replays</li><li>Browser, no install</li></ul>
+          <a className="btn btn--heat" href="https://ascension-peach.vercel.app" target="_blank" rel="noopener">Play the alpha</a>
+        </div>
+        <div className="split__panel split__panel--dim">
+          <span className="eyebrow">Honest limits</span>
+          <h3>What it is not, yet</h3>
+          <p>Balance is machine-tuned, not human-tuned. There is no online play. Animation is procedural rather than hand-authored. Warfront, Breachpoint and Ashlands are designed and not in production.</p>
+          <p>Dates go on this page only when a build exists. Weekly progress is in the <Link href="/dev-log">dev log</Link>.</p>
+        </div>
+      </div>
     </div></section>
   );
 }

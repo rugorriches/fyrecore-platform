@@ -41,8 +41,8 @@ export default async function Core() {
         <div><dt>Founder tier</dt><dd>{profile?.founder_tier ?? '--'}</dd></div>
       </dl>
 
-      <div className="head"><h2>Transferability</h2>
-        <p>Your FYRE would start locked and fully spendable here. It becomes transferable once this bar fills.</p></div>
+      <div className="head"><h2>Resale status</h2>
+        <p>Earned cosmetics are yours to use straight away. Reselling them unlocks when this bar fills.</p></div>
       <div className="bar" style={{height:'22px'}}>
         <i style={{animation:'none', transform:`scaleX(${pct/100})`}} />
       </div>

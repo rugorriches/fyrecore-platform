@@ -4,7 +4,7 @@ export default function Legal(){
   return (
     <section className="section"><div className="wrap prose" style={{maxWidth:'72ch'}}>
       <div className="head"><h2>Terms and risk</h2><p>Written to be read rather than to be scrolled past. If any of it is unclear, that is a fault worth telling us about.</p></div>
-      <div className="note note--warn"><p>FyreCore is an early-stage project built by a very small team. Ascension is not finished. FYRE does not exist on any live network. Nothing here is an offer of a security, and nothing here should be treated as financial advice.</p></div>
+      <div className="note note--warn"><p>FyreCore is an early-stage project built by a very small team. Ascension is not finished. FyreCore does not issue a token. Nothing here is an offer of a security, and nothing here should be treated as financial advice.</p></div>
       <h3 id="pass">Founder&rsquo;s Pass</h3>
       <p>The pass is a product. It grants early access to FyreCore titles and cosmetic items, and nothing else. It pays no rewards, distributes no revenue, confers no ownership in FyreCore, and carries no expectation of profit. The contract contains no payout function and none will be added.</p>
       <ul>
@@ -13,8 +13,10 @@ export default function Legal(){
         <li>Purchases are final once the pass is minted. Refunds before mint follow the payment processor terms.</li>
         <li>Not offered where prohibited by local law.</li>
       </ul>
-      <h3>FYRE</h3>
-      <p>FYRE is a published design, not a live asset. There is no presale, no private allocation, and no way to buy it. If it is ever deployed it will be distributed to people who played and to pass holders, as a locked balance, and it will only become transferable per account through the play threshold described on the token page.</p>
+      <h3>No token</h3>
+      <p>FyreCore does not issue, sell, or plan a cryptocurrency. Entry fees, prize pools and marketplace settlement are in USDC, a third-party stablecoin we neither control nor profit from holding. Passes and cosmetics are bought with a card, or with USDC, OMENX or GMT converted at the live rate. Any &ldquo;FYRE&rdquo; token offered for sale anywhere is not connected to us.</p>
+      <h3>Two sections</h3>
+      <p>FyreCore-section titles run on contracts and rails we own. OMEN-section titles are built by the same developer on the OMEN platform and use OMEN currencies and OMEN contracts. FyreCore is an independent third-party developer on that platform with no ownership stake in it. The two economies are unconnected, and nothing transfers between them.</p>
       <h3>Tournaments</h3>
       <p>Paid brackets are skill-based competition. Entry fees are escrowed on-chain before the first match and the platform rake is fixed and visible when a bracket is created. If a bracket is cancelled or not settled by its refund deadline, entrants may reclaim their entry fee directly from the contract without our involvement. Paid entry is unavailable where local law restricts it.</p>
       <h3>Item packs</h3>
