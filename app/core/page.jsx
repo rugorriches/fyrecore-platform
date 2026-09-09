@@ -13,7 +13,7 @@ export default async function Core() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect('/join');
 
-  const [{ data: profile }, { data: core }, { data: balances }, { data: quests }, { data: done }, { data: orders }, { data: inv }] =
+  const [{ data: profile }, { data: core }, { data: balances }, { data: quests }, { data: done }, { data: orders }, { data: inv }, { data: ver }] =
     await Promise.all([
       supabase.from('profiles').select('handle, founder_tier, wallet_address').eq('id', user.id).single(),
       supabase.from('cores').select('*').eq('user_id', user.id).single(),
@@ -21,7 +21,8 @@ export default async function Core() {
       supabase.from('quests').select('*').eq('active', true).order('id'),
       supabase.from('quest_completions').select('quest_id'),
       supabase.from('orders').select('id, state, price_usd_cents, currency, tx_hash, created_at, skus(name, kind)').in('state', ['paid', 'fulfilled']).order('created_at', { ascending: false }).limit(25),
-      supabase.from('inventory').select('id, bound, state, item_defs(name, rarity)').order('id', { ascending: false }).limit(50)
+      supabase.from('inventory').select('id, bound, state, item_defs(name, rarity)').order('id', { ascending: false }).limit(50),
+      supabase.from('verifications').select('status, dob_verified, country, verified_at, updated_at').eq('user_id', user.id).maybeSingle()
     ]);
   const explorer = process.env.NEXT_PUBLIC_CHAIN === 'base' ? 'https://basescan.org/tx/' : 'https://sepolia.basescan.org/tx/';
 
@@ -70,6 +71,22 @@ export default async function Core() {
           ))}
         </tbody>
       </table></div>
+
+      <div className="head" style={{marginTop:'4rem'}}><h2>Verification</h2>
+        <p>Required once before random boxes, paid brackets, or marketplace sales. ID, liveness and sanctions check by our verification provider; documents never reach us, only the result.</p></div>
+      {(() => {
+        const s = ver?.status ?? 'none';
+        const label = { approved:'Verified', in_review:'In review', pending:'In progress', declined:'Declined', expired:'Expired — verify again', abandoned:'Not finished', none:'Not verified' }[s] ?? s;
+        const tone = s === 'approved' ? 'var(--ember, #ff7a1a)' : 'var(--steel)';
+        return (
+          <div className="buy">
+            <p style={{margin:'0 0 .6rem'}}><b style={{color: tone}}>{label}</b>{s === 'approved' && ver?.country ? <span style={{color:'var(--steel)'}}> · {ver.country}{ver.dob_verified ? ' · 18+' : ''}</span> : null}</p>
+            {s === 'approved'
+              ? <span className="btn btn--ghost" style={{justifyContent:'center'}}>Done</span>
+              : <Link href="/verify" className="btn btn--heat">{s === 'in_review' || s === 'pending' ? 'Check status' : 'Verify now'}</Link>}
+          </div>
+        );
+      })()}
 
       <div className="head" style={{marginTop:'4rem'}}><h2>Wallet</h2>
         <p>The wallet your prize money, marketplace sales and Vault redemptions are paid to. You keep the keys; we only store the address. Linking is a signature, not a transaction.</p></div>
