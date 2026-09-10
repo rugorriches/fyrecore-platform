@@ -13,7 +13,7 @@ export default function Arena(){
           <tr><td><b>Ranked</b></td><td>$5&ndash;$50</td><td>Entry fees</td><td>USDC</td><td>Verified region</td></tr>
           <tr><td><b>High Stakes</b></td><td>$100&ndash;$500</td><td>Entry fees</td><td>USDC</td><td>Region + identity check</td></tr>
           <tr><td><b>Invitational</b></td><td>$1,000+</td><td>Entry fees and sponsors</td><td>USDC</td><td>Identity check, play threshold, seeded or qualified</td></tr>
-          <tr><td><b>Founder</b></td><td>Pass holders</td><td>Platform revenue</td><td>USDC and exclusive items</td><td>Founder&rsquo;s Pass</td></tr>
+          <tr><td><b>Founder</b></td><td>Pass holders</td><td>Seeded from platform revenue</td><td>USDC prizes and exclusive items, won by playing</td><td>Founder&rsquo;s Pass</td></tr>
         </tbody>
       </table></div>
 

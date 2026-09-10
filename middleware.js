@@ -30,7 +30,7 @@ export async function middleware(request) {
   // Sign-in required for most of the platform. Public: the Forge, joining, auth, legal, FAQ, shared player pages,
   // and inbound webhooks / server-to-server routes which carry their own signatures.
   const p = request.nextUrl.pathname;
-  const isPublic = p === '/' || p === '/join' || p.startsWith('/auth/') || p === '/legal' || p === '/faq'
+  const isPublic = p === '/' || p === '/join' || p.startsWith('/auth/') || p === '/legal' || p === '/terms' || p === '/privacy' || p === '/faq'
     || p.startsWith('/api/webhooks/') || p.startsWith('/api/auth/') || p === '/api/matches/report' || p === '/api/ledger';
   if (!user && !isPublic) {
     if (p.startsWith('/api/')) return NextResponse.json({ error: 'not signed in' }, { status: 401 });

@@ -30,13 +30,16 @@ export default function Footer(){
           </ul></div>
           <div><h4>Answers</h4><ul>
             <li><Link href="/faq">FAQ</Link></li>
-            <li><Link href="/legal">Terms and risk</Link></li>
-            <li><Link href="/legal#pass">Pass terms</Link></li>
-            <li><Link href="/legal#privacy">Privacy</Link></li>
+            <li><Link href="/terms">Terms of Service</Link></li>
+            <li><Link href="/terms#pass">Founder&rsquo;s Pass terms</Link></li>
+            <li><Link href="/privacy">Privacy Policy</Link></li>
           </ul></div>
         </div>
         <p className="foot__legal">
-          FyreCore does not issue a token and is not planning one. Nothing on this site is an offer to sell a security or an investment of any kind. The Founder&rsquo;s Pass grants access and cosmetic items only &mdash; it carries no rewards, revenue share, or expectation of profit. Nova Kata and Rift Runner are separate OMEN-platform titles with their own economies. &copy; {new Date().getFullYear()} FyreCore.
+          FyreCore does not issue a token and is not planning one. Nothing on this site is an offer to sell a security or an investment of any kind. The Founder&rsquo;s Pass grants early access, cosmetic items and founder-only competition &mdash; it carries no dividend, revenue share, or expectation of profit. Nova Kata and Rift Runner are separate OMEN-platform titles with their own economies.
+        </p>
+        <p className="foot__legal" style={{marginTop:'.6rem'}}>
+          &copy; {new Date().getFullYear()} FyreCore. All rights reserved. FyreCore, the FyreCore mark, Ascension, Rift Runner and Warfront are trademarks of FyreCore. &nbsp;<Link href="/terms">Terms</Link> &middot; <Link href="/privacy">Privacy</Link>
         </p>
       </div>
     </footer>
