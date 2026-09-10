@@ -469,7 +469,7 @@ main{position:relative;z-index:2}
 
 /* Page heads: forged, like the wordmark, quieter. */
 .section > .wrap > .head:first-child h2,.section > .wrap > .head.head--wide:first-child h2,.prose > .head h2{
-  font-size:clamp(2.6rem,7vw,5.2rem);line-height:.9;color:transparent;
+  font-size:clamp(2.3rem,5.2vw,4rem);line-height:.92;color:transparent;max-width:22ch;text-wrap:balance;
   background:linear-gradient(180deg,#FFF1D6 0%,var(--forge) 42%,var(--magma) 78%,#7A1A0C 100%);-webkit-background-clip:text;background-clip:text;
   filter:drop-shadow(0 0 18px color-mix(in srgb, var(--magma) 40%, transparent))}
 .section > .wrap > .head:first-child{position:relative;padding-top:.5rem}

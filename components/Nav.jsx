@@ -6,7 +6,7 @@ const FULL = [
   ['/games', 'Games'], ['/omen', 'OMEN'], ['/store', 'Store'], ['/nfts', 'NFTs'], ['/boxes', 'Boxes'], ['/arena', 'Arena'],
   ['/economy', 'Economy'], ['/ledger', 'Ledger'], ['/dev', 'Developers'], ['/faq', 'FAQ'], ['/roadmap', 'Roadmap']
 ];
-const GUEST = [['/faq', 'FAQ'], ['/legal', 'Legal']];
+const GUEST = [['/faq', 'FAQ'], ['/terms', 'Terms']];
 
 /** Signed out: the Forge, FAQ, Legal and one door in. Signed in: the whole platform and your Core. */
 export default async function Nav(){
