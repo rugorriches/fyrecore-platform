@@ -454,3 +454,50 @@ a{color:inherit;text-decoration:none}
 .forge__down span{position:absolute;left:50%;top:8px;width:3px;height:8px;margin-left:-1.5px;border-radius:2px;background:var(--forge);animation:forge-drop 1.8s ease-in-out infinite}
 @keyframes forge-drop{0%{transform:translateY(0);opacity:1}70%{transform:translateY(16px);opacity:0}100%{opacity:0}}
 @media (prefers-reduced-motion: reduce){.forge__mark span,.forge__line,.forge__acts,.forge__down,.forge__glow,.forge__cta::after,.forge__down span{animation:none}}
+
+
+/* ===== Forge language, site-wide ===== */
+.embers{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.9}
+body{background:radial-gradient(900px 520px at 50% 108%, color-mix(in srgb, var(--magma) 20%, transparent), transparent 70%),
+             radial-gradient(1100px 600px at 78% -8%, color-mix(in srgb, var(--magma) 10%, transparent), transparent 62%), #0C0B11}
+main{position:relative;z-index:2}
+.nav{background:color-mix(in srgb, #0C0B11 70%, transparent);border-bottom:1px solid color-mix(in srgb, var(--magma) 22%, var(--edge));
+  box-shadow:0 10px 40px -20px color-mix(in srgb, var(--magma) 45%, transparent)}
+.nav__links a{position:relative;transition:color .2s}
+.nav__links a::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:2px;background:linear-gradient(90deg,var(--forge),var(--magma));transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.nav__links a:hover::after{transform:scaleX(1)}
+
+/* Page heads: forged, like the wordmark, quieter. */
+.section > .wrap > .head:first-child h2,.section > .wrap > .head.head--wide:first-child h2,.prose > .head h2{
+  font-size:clamp(2.6rem,7vw,5.2rem);line-height:.9;color:transparent;
+  background:linear-gradient(180deg,#FFF1D6 0%,var(--forge) 42%,var(--magma) 78%,#7A1A0C 100%);-webkit-background-clip:text;background-clip:text;
+  filter:drop-shadow(0 0 18px color-mix(in srgb, var(--magma) 40%, transparent))}
+.section > .wrap > .head:first-child{position:relative;padding-top:.5rem}
+.section > .wrap > .head:first-child::before{content:'';position:absolute;left:-2rem;top:-1.5rem;width:22rem;height:12rem;pointer-events:none;z-index:-1;
+  background:radial-gradient(closest-side, color-mix(in srgb, var(--magma) 22%, transparent), transparent 75%);filter:blur(22px)}
+.head p{color:color-mix(in srgb, var(--bone) 78%, transparent)}
+.eyebrow{color:var(--forge);letter-spacing:.02em}
+
+/* Panels: depth, an ember rim on hover, one shared vocabulary. */
+.hud,.pillar,.slot,.ncard,.split__panel,.note{border-color:color-mix(in srgb, var(--magma) 14%, var(--edge));
+  box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 24px 50px -24px rgba(0,0,0,.9),0 0 0 0 transparent;transition:box-shadow .3s,border-color .3s,transform .3s}
+.pillar:hover,.slot:hover,.ncard:hover,.split__panel:hover{border-color:color-mix(in srgb, var(--magma) 45%, var(--edge));
+  box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 30px 60px -22px rgba(0,0,0,.95),0 0 32px -10px color-mix(in srgb, var(--magma) 55%, transparent);transform:translateY(-2px)}
+.hud{background:linear-gradient(160deg, color-mix(in srgb, var(--panel) 92%, var(--magma)) 0%, var(--pit) 60%, #100F17 100%)}
+
+/* Tables and forms carry the heat too. */
+.tbl tbody tr{transition:background .2s}
+.tbl tbody tr:hover{background:color-mix(in srgb, var(--magma) 7%, transparent)}
+.tbl th{color:var(--forge)}
+input,textarea{transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus{outline:none;border-color:var(--forge)!important;box-shadow:0 0 0 3px color-mix(in srgb, var(--forge) 22%, transparent)}
+.btn{transition:transform .15s,box-shadow .2s,filter .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn--heat{box-shadow:0 8px 24px -10px color-mix(in srgb, var(--magma) 75%, transparent),0 0 0 1px color-mix(in srgb, var(--forge) 25%, transparent) inset}
+.btn--heat:hover{filter:brightness(1.08)}
+.btn--ghost:hover{border-color:var(--forge);color:#fff}
+.chips li{border-color:color-mix(in srgb, var(--magma) 22%, var(--edge))}
+.ledger dd.pos{text-shadow:0 0 14px color-mix(in srgb, var(--jade) 45%, transparent)}
+.foot{border-top:1px solid color-mix(in srgb, var(--magma) 18%, var(--edge));background:linear-gradient(180deg, transparent, color-mix(in srgb, var(--magma) 6%, transparent))}
+.ticker{border-block:1px solid color-mix(in srgb, var(--magma) 22%, var(--edge))}
+@media (prefers-reduced-motion: reduce){.pillar:hover,.slot:hover,.ncard:hover,.split__panel:hover,.btn:hover{transform:none}}

@@ -2,6 +2,7 @@ import './globals.css';
 import { Anton, Barlow } from 'next/font/google';
 import Nav from '../components/Nav';
 import Footer from '../components/Footer';
+import Embers from '../components/Embers';
 
 const anton = Anton({ weight: '400', subsets: ['latin'], variable: '--font-display', display: 'swap' });
 const barlow = Barlow({ weight: ['400','500','600','700'], subsets: ['latin'], variable: '--font-body', display: 'swap' });
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${anton.variable} ${barlow.variable}`}>
       <body>
         <div className="grain" aria-hidden="true" />
+        <Embers />
         <a href="#main" className="skip">Skip to content</a>
         <Nav />
         <main id="main">{children}</main>
