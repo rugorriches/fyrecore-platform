@@ -13,6 +13,7 @@ export default function Join() {
   const [message, setMessage] = useState('');
   const ready = isSupabaseConfigured();
   const wc = hasWalletConnect();
+  const next = () => { const n = new URLSearchParams(window.location.search).get('next'); return n && n.startsWith('/') && !n.startsWith('//') ? n : '/core'; };
 
   async function wallet(method) {
     if (!ready) { setState('error'); setMessage('Sign-in is not connected yet on this deployment.'); return; }
@@ -20,7 +21,7 @@ export default function Join() {
     try {
       const supabase = createClient();
       await signInWithWallet({ supabase, method, onStatus: setMessage });
-      window.location.href = '/core';
+      window.location.href = next();
     } catch (e) { setState('error'); setMessage(e.message); }
   }
 
@@ -29,7 +30,7 @@ export default function Join() {
     if (!email.includes('@')) { setState('error'); setMessage('That does not look like an email address.'); return; }
     setState('sending');
     const supabase = createClient();
-    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: `${window.location.origin}/auth/callback` } });
+    const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: `${window.location.origin}/auth/callback?next=${encodeURIComponent(next())}` } });
     if (error) { setState('error'); setMessage(error.message); return; }
     setState('sent'); setMessage('Check your email. The link signs you in and creates your Core.');
   }
