@@ -18,13 +18,15 @@ export async function GET(request) {
 
   const { data: { user } } = await supabase.auth.getUser();
   if (user) {
+    // Profile + Core are created by the auth.users trigger; this is a belt-and-braces check for pre-trigger accounts.
     const admin = createAdminClient();
-    const { data: existing } = await admin
-      .from('profiles').select('id').eq('id', user.id).maybeSingle();
+    const { data: existing } = await admin.from('profiles').select('id').eq('id', user.id).maybeSingle();
     if (!existing) {
-      await admin.from('profiles').insert({ id: user.id, handle: `core_${user.id.slice(0, 8)}` });
+      await admin.from('profiles').insert({ id: user.id });
       await admin.from('cores').insert({ user_id: user.id });
     }
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? null;
+    await admin.rpc('fn_record_auth_event', { p_user: user.id, p_event: 'sign_in', p_method: 'email', p_ip: ip, p_ua: request.headers.get('user-agent') ?? null });
   }
 
   return NextResponse.redirect(`${origin}${next}`);

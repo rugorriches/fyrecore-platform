@@ -15,7 +15,7 @@ export default async function Core() {
 
   const [{ data: profile }, { data: core }, { data: balances }, { data: quests }, { data: done }, { data: orders }, { data: inv }, { data: ver }] =
     await Promise.all([
-      supabase.from('profiles').select('handle, founder_tier, wallet_address').eq('id', user.id).single(),
+      supabase.from('profiles').select('handle, display_name, founder_tier, wallet_address').eq('id', user.id).single(),
       supabase.from('cores').select('*').eq('user_id', user.id).single(),
       supabase.from('embers_balances').select('season_id, balance'),
       supabase.from('quests').select('*').eq('active', true).order('id'),
@@ -35,9 +35,14 @@ export default async function Core() {
   return (
     <section className="section"><div className="wrap">
       <div className="head">
-        <h2>{profile?.handle ?? 'Your Core'}</h2>
-        <p>One identity across every FyreCore game. Rating and mastery follow you into each new title.</p>
+        <h2>{profile?.display_name ?? (profile?.handle ? `@${profile.handle}` : 'Your Core')}</h2>
+        <p>One identity across every FyreCore game. Rating and mastery follow you into each new title. <Link href="/settings">Settings</Link>{profile?.handle ? <> · <Link href={`/u/${profile.handle}`}>Public profile</Link></> : null}</p>
       </div>
+      {!profile?.handle && (
+        <div className="note note--warn" style={{marginBottom:'2rem'}}>
+          <p><strong>Pick a handle.</strong> It is how other players find you and what your public profile lives under. <Link href="/settings">Choose one in Settings</Link>.</p>
+        </div>
+      )}
 
       <dl className="ledger" style={{marginBottom:'2.5rem'}}>
         <div><dt>Rating</dt><dd>{Math.round(core?.rating ?? 1500)}</dd></div>
