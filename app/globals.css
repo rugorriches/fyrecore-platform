@@ -425,3 +425,32 @@ a{color:inherit;text-decoration:none}
 @keyframes burst{0%{transform:rotateY(180deg) scale(1)}35%{transform:rotateY(180deg) scale(1.16)}100%{transform:rotateY(180deg) scale(1)}}
 @keyframes beam{0%{transform:rotateY(180deg) translateY(-40px);opacity:0}40%{opacity:1}100%{transform:rotateY(180deg) translateY(0)}}
 @media(prefers-reduced-motion:reduce){.card,.card__back{animation:none}}
+
+/* ===== The Forge (home) ===== */
+.forge{position:relative;min-height:100svh;display:grid;place-items:center;overflow:hidden;isolation:isolate;
+  background:radial-gradient(60% 45% at 50% 110%, color-mix(in srgb, var(--magma) 38%, transparent), transparent 70%), #0B0A10}
+.forge__embers{position:absolute;inset:0;width:100%;height:100%;z-index:1;display:block}
+.forge__glow{position:absolute;left:50%;bottom:-18vh;width:120vw;height:60vh;transform:translateX(-50%);z-index:0;pointer-events:none;
+  background:radial-gradient(closest-side, color-mix(in srgb, var(--forge) 28%, transparent), color-mix(in srgb, var(--magma) 18%, transparent) 45%, transparent 75%);
+  filter:blur(28px);animation:forge-breathe 6s ease-in-out infinite}
+@keyframes forge-breathe{0%,100%{opacity:.75;transform:translateX(-50%) scaleX(1)}50%{opacity:1;transform:translateX(-50%) scaleX(1.08)}}
+.forge__in{position:relative;z-index:2;text-align:center;padding:12vh var(--gut) 10vh;pointer-events:none}
+.forge__in .btn,.forge__in a{pointer-events:auto}
+.forge__mark{font-size:clamp(4.2rem,16vw,15rem);line-height:.8;letter-spacing:-.01em;display:flex;justify-content:center;gap:.06em;
+  color:transparent;background:linear-gradient(180deg,#FFF1D6 0%,var(--forge) 38%,var(--magma) 72%,#6B160A 100%);-webkit-background-clip:text;background-clip:text;
+  filter:drop-shadow(0 0 22px color-mix(in srgb, var(--magma) 55%, transparent)) drop-shadow(0 0 2px rgba(255,220,160,.6))}
+.forge__mark span{display:inline-block;animation:forge-in 1.6s cubic-bezier(.2,.8,.2,1) both}
+.forge__mark span:last-child{animation-delay:.18s}
+@keyframes forge-in{0%{opacity:0;transform:translateY(.35em) scaleY(.6);filter:blur(14px) brightness(2.4)}55%{opacity:1;filter:blur(0) brightness(1.7)}100%{transform:none;filter:none}}
+.forge__line{margin:1.6rem auto 2rem;font-size:clamp(1.05rem,2.2vw,1.45rem);color:color-mix(in srgb, var(--bone) 82%, transparent);max-width:34ch;
+  animation:forge-fade 1s .9s both}
+.forge__acts{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;animation:forge-fade 1s 1.15s both}
+.forge__cta{padding-inline:2.4rem;font-size:1.05rem;position:relative}
+.forge__cta::after{content:'';position:absolute;inset:-6px;border-radius:inherit;pointer-events:none;
+  box-shadow:0 0 0 0 color-mix(in srgb, var(--magma) 60%, transparent);animation:forge-pulse 2.6s 2s ease-out infinite}
+@keyframes forge-pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--magma) 55%, transparent)}100%{box-shadow:0 0 0 22px transparent}}
+@keyframes forge-fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.forge__down{position:absolute;left:50%;bottom:2.2rem;transform:translateX(-50%);z-index:2;width:26px;height:42px;border:1.5px solid color-mix(in srgb, var(--bone) 35%, transparent);border-radius:14px;animation:forge-fade 1s 1.8s both}
+.forge__down span{position:absolute;left:50%;top:8px;width:3px;height:8px;margin-left:-1.5px;border-radius:2px;background:var(--forge);animation:forge-drop 1.8s ease-in-out infinite}
+@keyframes forge-drop{0%{transform:translateY(0);opacity:1}70%{transform:translateY(16px);opacity:0}100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.forge__mark span,.forge__line,.forge__acts,.forge__down,.forge__glow,.forge__cta::after,.forge__down span{animation:none}}

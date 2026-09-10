@@ -23,6 +23,10 @@ export async function POST() {
   const { data: existing } = await admin.from('verifications').select('status, session_id').eq('user_id', user.id).maybeSingle();
   if (existing?.status === 'approved') return NextResponse.json({ status: 'approved' });
 
+  // Each session costs money at the provider. Cap new sessions platform-wide so a bot burst is bounded (~$35/h at 60).
+  const { count: recent } = await admin.from('verifications').select('user_id', { count: 'exact', head: true }).gte('updated_at', new Date(Date.now() - 3_600_000).toISOString());
+  if (!existing?.session_id && (recent ?? 0) >= 60) return NextResponse.json({ error: 'verification is busy right now — try again in an hour' }, { status: 503 });
+
   const site = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.fyrecore.app';
   // v3 Sessions API. Idempotent server-side: one unfinished session per (workflow_id, vendor_data).
   const res = await fetch('https://verification.didit.me/v3/session/', {

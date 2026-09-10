@@ -27,7 +27,7 @@ export default function AccountActions({ hasEmail, hasWallet }) {
           <button className="btn btn--ghost" onClick={addEmail} style={{cursor:'pointer'}}>Send link</button>
         </div>
       </>)}
-      {!hasWallet && <p style={{color:'var(--steel)', fontSize:'.85rem', margin: hasEmail ? 0 : '1rem 0 0'}}>Wallet sign-in for an email account: link your payout wallet below now; signing in with it directly is coming once identity linking for wallets ships.</p>}
+      {!hasWallet && <p style={{color:'var(--steel)', fontSize:'.85rem', margin: hasEmail ? 0 : '1rem 0 0'}}>Link your payout wallet below and you can sign in with it too — the wallet signs one message and lands in this same Core.</p>}
       <div style={{display:'flex', gap:'.6rem', marginTop:'1.2rem', flexWrap:'wrap'}}>
         <button className="btn btn--ghost" onClick={() => signOut('local')} style={{cursor:'pointer'}}>Sign out</button>
         <button className="btn btn--ghost" onClick={() => signOut('global')} style={{cursor:'pointer'}}>Sign out everywhere</button>
