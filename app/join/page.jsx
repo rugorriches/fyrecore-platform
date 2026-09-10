@@ -39,18 +39,19 @@ export default function Join() {
   return (
     <section className="section"><div className="wrap" style={{maxWidth:'44rem'}}>
       <div className="head">
-        <h2>Create your Core</h2>
-        <p>One identity across every FyreCore game. Sign in with the wallet you already have, or with an email link if you only want to play for free. We never hold your keys or your funds.</p>
+        <h2>Enter FyreCore</h2>
+        <p>One Core across every game. New here or coming back, it is the same door.</p>
       </div>
 
       <div className="hud" style={{padding:'1.6rem'}}>
         <div style={{display:'grid', gridTemplateColumns: wc ? '1fr 1fr' : '1fr', gap:'.6rem'}}>
           <button onClick={() => wallet('injected')} disabled={busy} className="btn btn--heat" style={{justifyContent:'center',cursor:busy?'default':'pointer',border:'none'}}>
-            {state==='wallet' ? 'Working…' : 'Sign in with browser wallet'}
+            {state==='wallet' ? 'Check your wallet…' : 'Continue with wallet'}
           </button>
-          {wc && <button onClick={() => wallet('walletconnect')} disabled={busy} className="btn btn--ghost" style={{justifyContent:'center',cursor:busy?'default':'pointer'}}>WalletConnect (phone)</button>}
+          {wc && <button onClick={() => wallet('walletconnect')} disabled={busy} className="btn btn--ghost" style={{justifyContent:'center',cursor:busy?'default':'pointer'}}>Phone wallet (WalletConnect)</button>}
         </div>
-        <small style={{display:'block',color:'var(--steel)',fontSize:'.78rem',marginTop:'.6rem'}}>MetaMask, Rabby or any extension; WalletConnect for the wallet app on your phone. You sign one free message, no transaction. That wallet becomes where prizes are paid.</small>
+        <small style={{display:'block',color:'var(--steel)',fontSize:'.78rem',marginTop:'.6rem'}}>Any Base-compatible wallet: MetaMask, Rabby, Rainbow, Trust, or the app on your phone. One free signature, no transaction. Prizes are paid to this wallet.</small>
+        {state==='wallet' && message && <p style={{margin:'.9rem 0 0',fontSize:'.85rem',color:'var(--forge)'}}>{message}</p>}
 
         <div style={{display:'flex',alignItems:'center',gap:'.8rem',margin:'1.4rem 0 1rem',color:'var(--steel)',fontSize:'.78rem'}}>
           <span style={{flex:1,height:1,background:'var(--edge)'}} />or an email link<span style={{flex:1,height:1,background:'var(--edge)'}} />

@@ -18,6 +18,9 @@ export async function POST(req) {
   let body = {}; try { body = await req.json(); } catch {}
   const method = ['email', 'wallet', 'walletconnect'].includes(body?.method) ? body.method : null;
   const admin = createAdminClient();
+  // Repair path: the auth trigger normally creates these, but never block a signed-in user on a missing row.
+  await admin.from('profiles').upsert({ id: user.id }, { onConflict: 'id', ignoreDuplicates: true });
+  await admin.from('cores').upsert({ user_id: user.id }, { onConflict: 'user_id', ignoreDuplicates: true });
 
   const web3 = (user.identities ?? []).find(i => i.provider === 'web3');
   const idAddr = web3 ? (JSON.stringify(web3.identity_data ?? {}).match(/0x[0-9a-fA-F]{40}/) ?? [])[0]?.toLowerCase() : null;
