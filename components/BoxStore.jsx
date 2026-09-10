@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 const Box3D = dynamic(() => import('./Box3D'), { ssr: false });
-import { payWithUsdc } from '../lib/wallet';
+import { payWithUsdc, hasWalletConnect } from '../lib/wallet';
 
 const RCOL = { common:'#7A8299', uncommon:'#3FE0A8', rare:'#4E8BFF', epic:'#A46BFF', legendary:'#FFC24A', mythic:'#FF4423', relic:'#EDE6DC' };
 const RDUR = { common:800, uncommon:900, rare:1100, epic:1600, legendary:2200, mythic:3000, relic:3400 };
@@ -19,10 +19,11 @@ export default function BoxStore({ boxes, rarities, openingFromUrl }) {
   // Returning with ?opening=ID (paid on-chain, not yet opened — e.g. after a mobile wallet round-trip) -> open it
   useEffect(() => { if (openingFromUrl) { const b = boxes.find(x => x.id === openingFromUrl.boxId) ?? sel; if (b) setSel(b); openNow(openingFromUrl.id); } }, [openingFromUrl]); // eslint-disable-line
 
-  async function buyUsdc() {
+  async function buyUsdc(method) {
     try {
       const clientSeed = crypto.getRandomValues(new Uint32Array(4)).join('-');
       const r = await payWithUsdc({
+        method,
         onStatus: setStatus,
         quoteFor: async (buyer) => {
           const q = await fetch('/api/checkout/quote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ boxId: sel.id, buyer, clientSeed }) });
@@ -63,7 +64,8 @@ export default function BoxStore({ boxes, rarities, openingFromUrl }) {
         {status && <p className="bx__status">{status}</p>}
         {!result && phase === 'idle' && sel && (
           <div className="hero__acts" style={{justifyContent:'center', flexDirection:'column', alignItems:'center', gap:'.5rem'}}>
-            <button className="btn btn--heat" onClick={buyUsdc} style={{cursor:'pointer',border:'none'}}>Pay with USDC on Base</button>
+            <button className="btn btn--heat" onClick={() => buyUsdc('injected')} style={{cursor:'pointer',border:'none'}}>Pay with USDC on Base</button>
+            {hasWalletConnect() && <button className="btn btn--ghost" onClick={() => buyUsdc('walletconnect')} style={{cursor:'pointer', fontSize:'.85rem'}}>Pay from a phone wallet (WalletConnect)</button>}
             <small style={{color:'var(--steel)', fontSize:'.78rem'}}>MetaMask, Rabby, or any WalletConnect wallet. Price is exact, no markup. <a href="/faq#usdc">How to get USDC on Base</a></small>
           </div>
         )}

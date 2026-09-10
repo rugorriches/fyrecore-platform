@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { payWithUsdc } from '../lib/wallet';
+import { payWithUsdc, hasWalletConnect } from '../lib/wallet';
 
 /**
  * One-click USDC purchase for a fixed-contents SKU (cosmetic, pass, pack, perk).
@@ -11,11 +11,12 @@ export default function BuyUsdc({ skuId, priceUsdCents, label = 'Buy with USDC',
   const [done, setDone] = useState(false);
   const [busy, setBusy] = useState(false);
 
-  async function go() {
+  async function go(method) {
     if (busy || done || soldOut) return;
     setBusy(true);
     try {
       const r = await payWithUsdc({
+        method,
         onStatus: setStatus,
         quoteFor: async (buyer) => {
           const q = await fetch('/api/checkout/quote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ skuId, buyer, qty: 1 }) });
@@ -36,11 +37,17 @@ export default function BuyUsdc({ skuId, priceUsdCents, label = 'Buy with USDC',
   }
 
   const price = `$${(priceUsdCents / 100).toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+  const wc = hasWalletConnect();
   return (
     <div className="buy">
-      <button className={`btn ${done ? 'btn--ghost' : 'btn--heat'}`} onClick={go} disabled={busy || done || soldOut} style={{cursor: busy || done || soldOut ? 'default' : 'pointer', border:'none', width: compact ? 'auto' : '100%', justifyContent:'center'}}>
+      <button className={`btn ${done ? 'btn--ghost' : 'btn--heat'}`} onClick={() => go('injected')} disabled={busy || done || soldOut} style={{cursor: busy || done || soldOut ? 'default' : 'pointer', border:'none', width: compact ? 'auto' : '100%', justifyContent:'center'}}>
         {soldOut ? 'Sold out' : done ? 'Owned' : busy ? 'Working…' : `${label} · ${price}`}
       </button>
+      {wc && !done && !soldOut && (
+        <button className="btn btn--ghost" onClick={() => go('walletconnect')} disabled={busy} style={{cursor: busy ? 'default' : 'pointer', width: compact ? 'auto' : '100%', justifyContent:'center', marginTop:'.5rem', fontSize:'.85rem'}}>
+          Pay from a phone wallet (WalletConnect)
+        </button>
+      )}
       {status && <small className="buy__status">{status}</small>}
     </div>
   );
