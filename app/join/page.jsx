@@ -23,14 +23,33 @@ export default function Join() {
     setMessage('Check your email. The link signs you in and creates your Core.');
   }
 
+  async function google() {
+    if (!ready) { setState('error'); setMessage('Sign-in is not connected yet on this deployment.'); return; }
+    setState('google');
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: { redirectTo: `${window.location.origin}/auth/callback`, queryParams: { prompt: 'select_account' } }
+    });
+    if (error) { setState('error'); setMessage(error.message); }
+  }
+
   return (
     <section className="section"><div className="wrap" style={{maxWidth:'44rem'}}>
       <div className="head">
         <h2>Create your Core</h2>
-        <p>One identity across every FyreCore game. An email address is all it takes &mdash; a wallet is created for you and you will never see a seed phrase.</p>
+        <p>One identity across every FyreCore game. Sign in with Google or an email link; nothing to install and no wallet needed to play. Connect a wallet you control later, only when money is involved.</p>
       </div>
 
       <div className="hud" style={{padding:'1.6rem'}}>
+        <button onClick={google} disabled={state==='google'||state==='sent'}
+                className="btn btn--heat" style={{width:'100%',justifyContent:'center',cursor:'pointer',border:'none',gap:'.6rem'}}>
+          <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.3l7.9 6.1C12.4 13.7 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.7 6c4.5-4.2 6.9-10.3 6.9-17.7z"/><path fill="#FBBC05" d="M10.5 28.6A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.1.8-4.6l-7.9-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.7-6c-2.1 1.4-4.9 2.3-8.2 2.3-6.3 0-11.6-4.2-13.5-9.9l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>
+          {state==='google' ? 'Opening Google…' : 'Continue with Google'}
+        </button>
+        <div style={{display:'flex',alignItems:'center',gap:'.8rem',margin:'1.2rem 0',color:'var(--steel)',fontSize:'.78rem'}}>
+          <span style={{flex:1,height:1,background:'var(--edge)'}} />or use an email link<span style={{flex:1,height:1,background:'var(--edge)'}} />
+        </div>
         <label htmlFor="email" style={{display:'block',fontSize:'.82rem',fontWeight:700,color:'var(--steel)',marginBottom:'.5rem',position:'relative'}}>Email address</label>
         <input
           id="email" type="email" value={email} autoComplete="email"
@@ -41,7 +60,7 @@ export default function Join() {
                   border:'1px solid var(--edge)',color:'var(--bone)',font:'inherit',fontSize:'.95rem'}}
         />
         <button onClick={send} disabled={state==='sending'||state==='sent'}
-                className="btn btn--heat" style={{marginTop:'1rem',width:'100%',justifyContent:'center',cursor:'pointer',border:'none'}}>
+                className="btn btn--ghost" style={{marginTop:'1rem',width:'100%',justifyContent:'center',cursor:'pointer'}}>
           {state==='sending' ? 'Sending the link' : state==='sent' ? 'Link sent' : 'Send me a sign-in link'}
         </button>
         {message && (
