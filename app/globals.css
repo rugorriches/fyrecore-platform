@@ -501,3 +501,17 @@ input:focus,textarea:focus{outline:none;border-color:var(--forge)!important;box-
 .foot{border-top:1px solid color-mix(in srgb, var(--magma) 18%, var(--edge));background:linear-gradient(180deg, transparent, color-mix(in srgb, var(--magma) 6%, transparent))}
 .ticker{border-block:1px solid color-mix(in srgb, var(--magma) 22%, var(--edge))}
 @media (prefers-reduced-motion: reduce){.pillar:hover,.slot:hover,.ncard:hover,.split__panel:hover,.btn:hover{transform:none}}
+
+
+/* Inline links inside prose and page intros are links. */
+.head p a,.prose p a,.note p a,.section p a{color:var(--forge);text-decoration:underline;text-underline-offset:3px;text-decoration-color:color-mix(in srgb, var(--forge) 45%, transparent)}
+.head p a:hover,.prose p a:hover,.section p a:hover{color:#fff;text-decoration-color:var(--forge)}
+/* Account panels (Core, Settings): every section sits in a forged panel. */
+.acct{padding:1.4rem 1.6rem;margin-top:.4rem;border:1px solid color-mix(in srgb, var(--magma) 16%, var(--edge));position:relative;isolation:isolate;
+  background:linear-gradient(160deg, color-mix(in srgb, var(--panel) 90%, var(--magma)) 0%, var(--pit) 55%, #100F17 100%);
+  box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 24px 50px -24px rgba(0,0,0,.9);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+.acct::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 40% at 100% 0%, color-mix(in srgb, var(--magma) 14%, transparent), transparent 70%)}
+.acct > *{position:relative;z-index:1}
+.acct .hud{background:transparent;border:0;box-shadow:none;padding:0;clip-path:none}
+.acct .hud::before{display:none}
+.buy__status{color:var(--steel);font-size:.82rem}

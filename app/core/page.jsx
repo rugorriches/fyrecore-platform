@@ -79,6 +79,7 @@ export default async function Core() {
 
       <div className="head" style={{marginTop:'4rem'}}><h2>Verification</h2>
         <p>Required once before random boxes, paid brackets, or marketplace sales. ID, liveness and sanctions check by our verification provider; documents never reach us, only the result.</p></div>
+      <div className="acct">
       {(() => {
         const s = ver?.status ?? 'none';
         const label = { approved:'Verified', in_review:'In review', pending:'In progress', declined:'Declined', expired:'Expired — verify again', abandoned:'Not finished', none:'Not verified' }[s] ?? s;
@@ -93,12 +94,16 @@ export default async function Core() {
         );
       })()}
 
-      <div className="head" style={{marginTop:'4rem'}}><h2>Wallet</h2>
+      </div>
+<div className="head" style={{marginTop:'4rem'}}><h2>Wallet</h2>
         <p>The wallet your prize money, marketplace sales and Vault redemptions are paid to. You keep the keys; we only store the address. Linking is a signature, not a transaction.</p></div>
+      <div className="acct">
       <LinkWallet current={profile?.wallet_address ?? null} />
 
-      <div className="head" style={{marginTop:'4rem'}}><h2>Purchases</h2>
+      </div>
+<div className="head" style={{marginTop:'4rem'}}><h2>Purchases</h2>
         <p>Everything you have bought, each with the on-chain transaction that paid for it.</p></div>
+      <div className="acct">
       {(orders ?? []).length ? (
         <div className="tblwrap"><table className="tbl">
           <thead><tr><th>Item</th><th>Paid</th><th>State</th><th>Transaction</th></tr></thead>
@@ -115,13 +120,16 @@ export default async function Core() {
         </table></div>
       ) : <p style={{color:'var(--steel)'}}>Nothing yet. The <Link href="/store">store</Link> and <Link href="/boxes">boxes</Link> both settle in USDC on Base.</p>}
 
-      <div className="head" style={{marginTop:'4rem'}}><h2>Inventory</h2>
+      </div>
+<div className="head" style={{marginTop:'4rem'}}><h2>Inventory</h2>
         <p>Items marked bound came from boxes and can never be sold or redeemed. Everything else can.</p></div>
+      <div className="acct">
       {(inv ?? []).length ? (
         <ul className="chips">{inv.map(x => <li key={x.id}>{x.item_defs?.name ?? 'Item'} &middot; {x.item_defs?.rarity}{x.bound ? ' · bound' : ''}</li>)}</ul>
       ) : <p style={{color:'var(--steel)'}}>Empty.</p>}
 
-      <p style={{marginTop:'2.5rem'}}>
+      </div>
+<p style={{marginTop:'2.5rem'}}>
         <Link href="/ledger" className="btn btn--ghost">See the platform books</Link>
       </p>
     </div></section>
