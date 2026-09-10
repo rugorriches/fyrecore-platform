@@ -5,7 +5,7 @@ export default function Legal(){
     <section className="section"><div className="wrap prose" style={{maxWidth:'72ch'}}>
       <div className="head"><h2>Terms and risk</h2><p>Written to be read rather than to be scrolled past. If any of it is unclear, that is a fault worth telling us about.</p></div>
       <div className="note note--warn"><p>FyreCore is an early-stage project built by a very small team. Ascension is not finished. FyreCore does not issue a token. Nothing here is an offer of a security, and nothing here should be treated as financial advice.</p></div>
-      <h3 id="pass">VIP Pass</h3>
+      <h3 id="pass">Founder&rsquo;s Pass</h3>
       <p>The pass is a product. It grants early access to FyreCore titles and cosmetic items, and nothing else. It pays no rewards, distributes no revenue, confers no ownership in FyreCore, and carries no expectation of profit. The contract contains no payout function and none will be added.</p>
       <ul>
         <li>Passes are non-transferable for twelve months from mint, enforced by the contract.</li>

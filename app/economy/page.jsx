@@ -18,7 +18,7 @@ export default function Economy(){
         <tbody>
           <tr><td><b>Tournament entry</b></td><td>USDC</td><td>Escrowed, then the winners</td></tr>
           <tr><td><b>Prize pools</b></td><td>USDC</td><td>Placings, paid at the final</td></tr>
-          <tr><td><b>VIP Pass</b></td><td>USDC</td><td>FyreCore &mdash; funds art and prize seeding</td></tr>
+          <tr><td><b>Founder&rsquo;s Pass</b></td><td>USDC</td><td>FyreCore &mdash; funds art and prize seeding</td></tr>
           <tr><td><b>Cosmetics and packs</b></td><td>USDC</td><td>FyreCore, or 70% to the creator</td></tr>
           <tr><td><b>Random boxes</b></td><td>USDC</td><td>FyreCore &mdash; drops are bound and never cash out</td></tr>
           <tr><td><b>Marketplace sale</b></td><td>USDC</td><td>Seller, minus a 5% fee</td></tr>
