@@ -56,15 +56,15 @@ export default function Join() {
         <div style={{display:'flex',alignItems:'center',gap:'.8rem',margin:'1.4rem 0 1rem',color:'var(--steel)',fontSize:'.78rem'}}>
           <span style={{flex:1,height:1,background:'var(--edge)'}} />or an email link<span style={{flex:1,height:1,background:'var(--edge)'}} />
         </div>
-        <label htmlFor="email" style={{display:'block',fontSize:'.82rem',fontWeight:700,color:'var(--steel)',marginBottom:'.5rem'}}>Email address</label>
+        <label htmlFor="email" style={{display:'block',fontSize:'.82rem',fontWeight:700,color:'var(--steel)',marginBottom:'.5rem',position:'relative',zIndex:2}}>Email address</label>
         <input id="email" type="email" value={email} autoComplete="email"
-          onChange={(e)=>{setEmail(e.target.value); if(state==='error') setState('idle');}}
-          onKeyDown={(e)=>{ if(e.key==='Enter') send(); }} disabled={busy||state==='sent'}
-          style={{width:'100%',padding:'.8rem 1rem',background:'#0D0C13',border:'1px solid var(--edge)',color:'var(--bone)',font:'inherit',fontSize:'.95rem'}} />
-        <button onClick={send} disabled={busy||state==='sent'} className="btn btn--ghost" style={{marginTop:'1rem',width:'100%',justifyContent:'center',cursor:busy?'default':'pointer'}}>
+          onChange={(e)=>{setEmail(e.target.value); if(state==='error'||state==='wallet') setState('idle');}}
+          onKeyDown={(e)=>{ if(e.key==='Enter') send(); }} disabled={state==='sending'||state==='sent'}
+          style={{position:'relative',zIndex:2,width:'100%',padding:'.8rem 1rem',background:'#0D0C13',border:'1px solid var(--edge)',color:'var(--bone)',font:'inherit',fontSize:'.95rem'}} />
+        <button onClick={send} disabled={state==='sending'||state==='sent'} className="btn btn--ghost" style={{position:'relative',zIndex:2,marginTop:'1rem',width:'100%',justifyContent:'center',cursor:state==='sending'?'default':'pointer'}}>
           {state==='sending' ? 'Sending the link' : state==='sent' ? 'Link sent' : 'Send me a sign-in link'}
         </button>
-        {message && <p style={{marginTop:'1rem',marginBottom:0,fontSize:'.82rem',color: state==='error' ? 'var(--magma)' : 'var(--jade)'}}>{message}</p>}
+        {message && state!=='wallet' && <p style={{marginTop:'1rem',marginBottom:0,fontSize:'.82rem',color: state==='error' ? 'var(--magma)' : 'var(--jade)'}}>{message}</p>}
       </div>
 
       {!ready && <div className="note note--warn" style={{marginTop:'1.5rem'}}><p>Sign-in is not wired up on this deployment yet.</p></div>}
