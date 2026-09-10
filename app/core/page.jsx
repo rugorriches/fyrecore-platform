@@ -48,7 +48,7 @@ export default async function Core() {
         <div><dt>Rating</dt><dd>{Math.round(core?.rating ?? 1500)}</dd></div>
         <div><dt>Embers</dt><dd className="pos">{embers.toLocaleString()}</dd></div>
         <div><dt>Reviewed matches</dt><dd>{matches}</dd></div>
-        <div><dt>Founder tier</dt><dd>{profile?.founder_tier ?? '--'}</dd></div>
+        <div><dt>VIP tier</dt><dd>{profile?.founder_tier ?? '--'}</dd></div>
       </dl>
 
       <div className="head"><h2>Resale status</h2>

@@ -4,7 +4,7 @@ import { createClient, isSupabaseConfigured } from '../../../lib/supabase/server
 export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }) { return { title: `@${params.handle}` }; }
 
-const TIER = { founder:'Founder', early:'Early access' };
+const TIER = { founder:'VIP', early:'Early access' };
 
 /** Public player page. Reads only the public_profiles view: never email, never wallet. */
 export default async function PublicProfile({ params }) {

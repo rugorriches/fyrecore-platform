@@ -1,21 +1,21 @@
 import Link from 'next/link';
 
-export const metadata = { title: "Founder's Pass" };
+export const metadata = { title: "VIP Pass" };
 
 export default function Pass(){
   return (
     <section className="section"><div className="wrap">
-      <div className="head"><h2>Founder&rsquo;s Pass</h2><p>Early access and cosmetics across every FyreCore title, bought once. It funds the first game&rsquo;s art and the first season&rsquo;s prize pools.</p></div>
+      <div className="head"><h2>VIP Pass</h2><p>Early access and cosmetics across every FyreCore title, bought once. It funds the first game&rsquo;s art and the first season&rsquo;s prize pools.</p></div>
       <div className="note note--warn" style={{marginBottom:'2.5rem'}}><p><strong>What this is not:</strong> it pays no rewards, shares no revenue, and carries no expectation of profit. The contract has no payout function of any kind. If you are looking for a return, this is the wrong product and we would rather say so here than in a footnote.</p></div>
       <div className="tiers">
         <article className="tier"><h3>Spark</h3><div className="tier__price">$39</div><div className="tier__supply">10,000 available</div>
-          <ul><li>Early access to Ascension</li><li>One exclusive skin</li><li>1.5&times; Embers</li><li>Founder badge on your Core</li></ul>
+          <ul><li>Early access to Ascension</li><li>One exclusive skin</li><li>1.5&times; Embers</li><li>VIP badge on your Core</li></ul>
           <span className="btn btn--ghost">Opens with the first playable build</span></article>
         <article className="tier tier--lead"><h3>Ember</h3><div className="tier__price">$149</div><div className="tier__supply">1,500 available</div>
-          <ul><li>Early access to every FyreCore title</li><li>Exclusive skin set per title</li><li>2&times; Embers</li><li>Marketplace fee cut to 2.5%</li><li>Founder Discord role</li></ul>
+          <ul><li>Early access to every FyreCore title</li><li>Exclusive skin set per title</li><li>2&times; Embers</li><li>Marketplace fee cut to 2.5%</li><li>VIP Discord role</li></ul>
           <span className="btn btn--heat">Opens with the first playable build</span></article>
         <article className="tier"><h3>Blaze</h3><div className="tier__price">$499</div><div className="tier__supply">250 available</div>
-          <ul><li>Everything in Ember</li><li>Design a cosmetic with the team</li><li>Permanent Founder bracket seat</li><li>3&times; Embers</li><li>Name in the credits of every title</li></ul>
+          <ul><li>Everything in Ember</li><li>Design a cosmetic with the team</li><li>Permanent VIP bracket seat</li><li>3&times; Embers</li><li>Name in the credits of every title</li></ul>
           <span className="btn btn--ghost">Opens with the first playable build</span></article>
       </div>
       <div className="head" style={{marginTop:'4rem'}}><h2>Two rules we set for ourselves</h2></div>

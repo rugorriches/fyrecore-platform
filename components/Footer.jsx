@@ -26,7 +26,7 @@ export default function Footer(){
             <li><Link href="/economy">How the economy works</Link></li>
             <li><Link href="/economy#vault">The Vault</Link></li>
             <li><Link href="/ledger">Public ledger</Link></li>
-            <li><Link href="/founders-pass">Founder&rsquo;s Pass</Link></li>
+            <li><Link href="/vip-pass">VIP Pass</Link></li>
           </ul></div>
           <div><h4>Answers</h4><ul>
             <li><Link href="/faq">FAQ</Link></li>
@@ -36,7 +36,7 @@ export default function Footer(){
           </ul></div>
         </div>
         <p className="foot__legal">
-          FyreCore does not issue a token and is not planning one. Nothing on this site is an offer to sell a security or an investment of any kind. The Founder&rsquo;s Pass grants access and cosmetic items only &mdash; it carries no rewards, revenue share, or expectation of profit. Nova Kata and Rift Runner are separate OMEN-platform titles with their own economies. &copy; {new Date().getFullYear()} FyreCore.
+          FyreCore does not issue a token and is not planning one. Nothing on this site is an offer to sell a security or an investment of any kind. The VIP Pass grants access and cosmetic items only &mdash; it carries no rewards, revenue share, or expectation of profit. Nova Kata and Rift Runner are separate OMEN-platform titles with their own economies. &copy; {new Date().getFullYear()} FyreCore.
         </p>
       </div>
     </footer>

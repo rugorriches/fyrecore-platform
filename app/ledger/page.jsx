@@ -6,7 +6,7 @@ export const revalidate = 60;
 const cats = [
   ['Tournament rake','Share of every paid bracket, capped at 10% in the escrow contract'],
   ['Marketplace fee','5% standard, 2.5% for pass holders, capped at 7.5% in code'],
-  ['Pass sales',"Founder's Pass mints"],
+  ['Pass sales',"VIP Pass mints"],
   ['Cosmetic sales','Direct sales and Vault fission'],
   ['Creator fees','Platform share of creator cosmetic sales']
 ];
