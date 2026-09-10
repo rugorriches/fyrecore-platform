@@ -442,7 +442,7 @@ a{color:inherit;text-decoration:none}
 .forge__mark span{display:inline-block;animation:forge-in 1.6s cubic-bezier(.2,.8,.2,1) both}
 .forge__mark span:last-child{animation-delay:.18s}
 @keyframes forge-in{0%{opacity:0;transform:translateY(.35em) scaleY(.6);filter:blur(14px) brightness(2.4)}55%{opacity:1;filter:blur(0) brightness(1.7)}100%{transform:none;filter:none}}
-.forge__line{margin:1.6rem auto 2rem;font-size:clamp(1.05rem,2.2vw,1.45rem);color:color-mix(in srgb, var(--bone) 82%, transparent);max-width:34ch;
+.forge__line{margin:1.6rem auto 2rem;font-size:clamp(1.05rem,2.2vw,1.45rem);color:color-mix(in srgb, var(--bone) 82%, transparent);max-width:46ch;text-wrap:balance;
   animation:forge-fade 1s .9s both}
 .forge__acts{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;animation:forge-fade 1s 1.15s both}
 .forge__cta{padding-inline:2.4rem;font-size:1.05rem;position:relative}
