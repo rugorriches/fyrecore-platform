@@ -3,6 +3,12 @@ import { NextResponse } from 'next/server';
 
 /** Refreshes the auth session cookie on navigation. */
 export async function middleware(request) {
+  // One canonical host. Wallet sign-in messages name the origin, and Supabase only allows www.
+  const host = request.headers.get('host') ?? '';
+  if (host === 'fyrecore.app') {
+    const url = request.nextUrl.clone(); url.host = 'www.fyrecore.app'; url.protocol = 'https:';
+    return NextResponse.redirect(url, 308);
+  }
   let response = NextResponse.next({ request });
 
   // Before the env vars are set, do nothing rather than crash every route.
