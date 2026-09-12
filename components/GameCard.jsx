@@ -34,8 +34,7 @@ export default function GameCard({ g, i = 0 }) {
           : <span className="gcard__cta gcard__cta--soon">In development</span>}
       </div>
       {live && g.play_url && (
-        <a className="gcard__play" href={g.play_url} target="_blank" rel="noopener"
-           onClick={(e) => e.stopPropagation()} aria-label={`Play ${g.name}`}>
+        <a className="gcard__play" href={g.play_url} target="_blank" rel="noopener" aria-label={`Play ${g.name}`}>
           <span className="gcard__playglyph" aria-hidden="true">&#9654;</span>Play now
         </a>
       )}
