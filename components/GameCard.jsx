@@ -1,12 +1,13 @@
+import Link from 'next/link';
 import { CURRENCY, STATUS } from '../lib/data';
 
 /**
- * Game card. A title marked `preview` renders as a card only: no link, no play URL, no details CTA.
- * Art falls back to the lettered plate when a game has no key art yet.
+ * Game card. Released titles: the whole card is a link to the FyreCore detail page, with a
+ * separate Play button that goes straight to the game. Previews render as a card only — no links.
  */
 export default function GameCard({ g, i = 0 }) {
   const omen = g.section === 'omen';
-  const live = !g.preview && g.play_url;
+  const live = !g.preview;
   const inner = (
     <>
       <div className="gcard__art" aria-hidden="true">
@@ -29,13 +30,19 @@ export default function GameCard({ g, i = 0 }) {
           {g.lane === 'both' && <li>Certified lane</li>}
         </ul>
         {live
-          ? <span className="gcard__cta">Play<i aria-hidden="true">&rarr;</i></span>
-          : <span className="gcard__cta gcard__cta--soon">{g.preview ? 'In development' : 'Details'}</span>}
+          ? <span className="gcard__cta">Details<i aria-hidden="true">&rarr;</i></span>
+          : <span className="gcard__cta gcard__cta--soon">In development</span>}
       </div>
+      {live && g.play_url && (
+        <a className="gcard__play" href={g.play_url} target="_blank" rel="noopener"
+           onClick={(e) => e.stopPropagation()} aria-label={`Play ${g.name}`}>
+          <span className="gcard__playglyph" aria-hidden="true">&#9654;</span>Play now
+        </a>
+      )}
     </>
   );
   const cls = `gcard reveal${omen ? ' gcard--omen' : ''}${g.preview ? ' gcard--preview' : ''}`;
   return live
-    ? <a className={cls} href={g.play_url} target="_blank" rel="noopener" style={{'--i': i}}>{inner}</a>
+    ? <div className={cls} style={{'--i': i}}><Link href={`/games/${g.slug}`} className="gcard__hit" aria-label={g.name} />{inner}</div>
     : <div className={cls} style={{'--i': i}}>{inner}</div>;
 }

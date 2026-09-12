@@ -531,3 +531,44 @@ input:focus,textarea:focus{outline:none;border-color:var(--forge)!important;box-
 .gcard--preview{cursor:default}
 .gcard--preview .gcard__art img,.gcard--preview .gcard__plate{filter:saturate(.55) brightness(.8)}
 .gcard--preview:hover .gcard__art img{transform:none}
+
+
+/* Whole card is the link; the Play button sits above it. */
+.gcard__hit{position:absolute;inset:0;z-index:3}
+.gcard__play{position:absolute;top:.9rem;right:.9rem;z-index:4;display:inline-flex;align-items:center;gap:.45rem;
+  padding:.5rem .95rem;font-family:var(--font-display);font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:#fff;text-decoration:none;
+  background:linear-gradient(135deg,var(--forge),var(--magma));border:1px solid color-mix(in srgb,#fff 22%,transparent);
+  clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));
+  box-shadow:0 8px 22px -8px color-mix(in srgb,var(--magma) 85%,transparent);transition:transform .18s,filter .18s,box-shadow .18s}
+.gcard__play:hover{transform:translateY(-1px) scale(1.03);filter:brightness(1.1);box-shadow:0 12px 28px -8px color-mix(in srgb,var(--magma) 95%,transparent)}
+.gcard--omen .gcard__play{background:linear-gradient(135deg,#8B6BFF,#5B3FD6);box-shadow:0 8px 22px -8px rgba(110,80,255,.85)}
+.gcard__playglyph{font-size:.7em;transform:translateY(-1px)}
+
+/* ===== Game detail page ===== */
+.gpage__hero{position:relative;min-height:56svh;display:flex;align-items:flex-end;overflow:hidden;border-bottom:1px solid color-mix(in srgb,var(--magma) 20%,var(--edge))}
+.gpage__art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.gpage__scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,color-mix(in srgb,var(--pit) 55%,transparent) 0%,transparent 30%,color-mix(in srgb,var(--pit) 88%,transparent) 76%,var(--pit) 100%)}
+.gpage__head{position:relative;z-index:2;padding:3rem 0 2.4rem}
+.gpage__back{display:inline-block;margin-bottom:1.2rem;color:var(--steel);font-size:.85rem;text-decoration:none}
+.gpage__back:hover{color:var(--forge)}
+.gpage__head h1{font-size:clamp(2.6rem,7vw,5rem);line-height:.9;margin:.6rem 0 .4rem;
+  color:transparent;background:linear-gradient(180deg,#FFF1D6,var(--forge) 45%,var(--magma) 82%,#7A1A0C);-webkit-background-clip:text;background-clip:text;
+  filter:drop-shadow(0 0 20px color-mix(in srgb,var(--magma) 45%,transparent))}
+.gpage__genre{color:var(--steel);margin:0 0 1.4rem}
+.gpage__play{border:none;font-size:1rem;padding-inline:1.8rem}
+.gpage__grid{display:grid;grid-template-columns:minmax(0,1fr) 20rem;gap:2.5rem;align-items:start}
+.gpage__main p{color:color-mix(in srgb,var(--bone) 80%,transparent);line-height:1.75}
+.gpage__lede{font-size:1.15rem;color:var(--bone)!important}
+.gpage__h2{font-size:var(--s2);margin:2.4rem 0 .8rem}
+.gpage__h2:first-child{margin-top:0}
+.gpage__h3{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--forge);margin:1.4rem 0 .5rem}
+.gpage__modes{display:grid;gap:.8rem}
+.gpage__mode{padding:1rem 1.2rem;border:1px solid color-mix(in srgb,var(--magma) 14%,var(--edge));background:linear-gradient(160deg,color-mix(in srgb,var(--panel) 90%,var(--magma)),var(--pit))}
+.gpage__modetop{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.35rem}
+.gpage__modetop span{color:var(--forge);font-size:.8rem}
+.gpage__mode p{margin:0;font-size:.9rem}
+.gpage__disc{margin-top:2.4rem}
+.gpage__disc p{font-size:.82rem;line-height:1.6}
+.gpage__status{margin:0;font-family:var(--font-display);font-size:1.2rem}
+.gpage__tags li{font-size:.72rem;text-transform:lowercase}
+@media (max-width:860px){.gpage__grid{grid-template-columns:1fr}.gpage__hero{min-height:42svh}}
