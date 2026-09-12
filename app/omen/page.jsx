@@ -13,7 +13,7 @@ export default async function Omen(){
       <div className="head head--wide">
         <span className="eyebrow eyebrow--omen">OMEN platform titles</span>
         <h2>Built on OMEN. Played by OMEN rules.</h2>
-        <p>These titles run on the OMEN Foundation platform on BSC and use its currencies, OMENX and GMT. Items are minted into OMEN&rsquo;s contracts and traded on OMENX. FyreCore is an independent third-party developer here with no ownership stake in OMEN.</p>
+        <p>These titles run on the OMEN Foundation platform on BSC and use its currencies, OMENX and GMT. Items are minted into OMEN&rsquo;s contracts and traded on OMENX. FyreCore is an independent third-party developer here with no ownership stake in OMEN. <b>Last Bastion is live and playable</b>; the rest are previews of what is in development and are not yet playable.</p>
       </div>
 
       <div className="rules">
