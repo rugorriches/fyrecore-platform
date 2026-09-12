@@ -34,12 +34,21 @@ export async function POST() {
     headers: { 'x-api-key': apiKey, 'content-type': 'application/json' },
     body: JSON.stringify({ workflow_id: workflow, vendor_data: user.id, callback: `${site}/verify?done=1`, callback_method: 'both' })
   });
-  if (!res.ok) return NextResponse.json({ error: 'provider error', detail: await res.text() }, { status: 502 });
+  if (!res.ok) {
+    const detail = await res.text();
+    console.error('didit create session failed', res.status, detail.slice(0, 500));
+    return NextResponse.json({ error: `provider error (${res.status})`, detail: detail.slice(0, 600) }, { status: 502 });
+  }
   const session = await res.json();
+  const url = session.url ?? session.session_url;   // docs show both field names
+  if (!url) {
+    console.error('didit create session: no url in response', JSON.stringify(session).slice(0, 400));
+    return NextResponse.json({ error: 'provider returned no verification link', detail: JSON.stringify(session).slice(0, 600) }, { status: 502 });
+  }
 
   await admin.rpc('fn_upsert_verification', {
     p_user: user.id, p_status: 'pending', p_session_id: session.session_id, p_vendor_status: 'created'
   });
 
-  return NextResponse.json({ status: 'pending', url: session.url });
+  return NextResponse.json({ status: 'pending', url });
 }

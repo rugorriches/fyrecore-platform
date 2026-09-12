@@ -11,7 +11,7 @@ export default function Verify() {
     const r = await fetch('/api/verify/start', { method: 'POST' });
     const d = await r.json();
     if (d.url) window.location.href = d.url;
-    else setState({ status: d.status ?? 'error', error: d.error });
+    else setState({ status: d.status ?? 'error', error: d.error, detail: d.detail });
   }
 
   const copy = {
@@ -32,6 +32,7 @@ export default function Verify() {
     <section className="section"><div className="wrap" style={{maxWidth:'44rem'}}>
       <div className="head"><span className="eyebrow">Identity</span><h2>{title}</h2><p>{body}</p></div>
       {canStart && <button onClick={start} className="btn btn--heat" style={{cursor:'pointer',border:'none'}}>Start verification</button>}
+      {state.detail && <pre style={{marginTop:'1.2rem',padding:'.9rem 1rem',background:'#0D0C13',border:'1px solid var(--edge)',color:'var(--steel)',fontSize:'.78rem',whiteSpace:'pre-wrap',wordBreak:'break-word'}}>{String(state.detail).slice(0, 600)}</pre>}
       <div className="note" style={{marginTop:'2rem'}}>
         <p>We store only the outcome, the date, the country on the document, and a session reference. Documents and photos stay with the verification provider and never reach our servers. Free play, campaign modes and cosmetics you already own never require this.</p>
       </div>
