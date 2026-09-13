@@ -1,8 +1,19 @@
 import Link from 'next/link';
 import Forge from '../components/Forge';
+import { createClient, isSupabaseConfigured } from '../lib/supabase/server';
+import { STATUS } from '../lib/data';
+
+export const revalidate = 300;
 
 /** Home: one moment, two actions. Everything explanatory lives on /platform, /economy and /games. */
-export default function Home(){
+export default async function Home(){
+  let roster = [];
+  if (isSupabaseConfigured()) {
+    const { data } = await createClient().from('games')
+      .select('slug, name, genre, section, status, art_url, preview, featured')
+      .order('featured', { ascending: false }).order('sort_order', { ascending: false }).limit(4);
+    roster = data ?? [];
+  }
   return (
     <>
       <Forge />
@@ -10,10 +21,23 @@ export default function Home(){
       <section className="section section--tight" id="games">
         <div className="wrap">
           <div className="roster">
-            <Link href="/games" className="slot"><h3>Ascension</h3><span>Anime arena fighter</span><em>FyreCore &middot; playable</em></Link>
-            <Link href="/games" className="slot"><h3>Rift Runner</h3><span>Arcade racer-shooter</span><em>FyreCore &middot; alpha</em></Link>
-            <Link href="/games" className="slot"><h3>Warfront</h3><span>Fantasy RTS</span><em>FyreCore &middot; in development</em></Link>
-            <Link href="/omen" className="slot"><h3>Last Bastion</h3><span>Siege survival</span><em>OMEN platform</em></Link>
+            {roster.map(g => {
+              const label = g.preview ? 'In development' : (STATUS[g.status] ?? g.status);
+              const body = (
+                <>
+                  {g.art_url && <img className="slot__art" src={g.art_url} alt="" loading="lazy" />}
+                  <span className="slot__body">
+                    <h3>{g.name.replace(/^OMEN:\s*/, '')}</h3>
+                    <span>{g.genre}</span>
+                    <em>{g.section === 'omen' ? 'OMEN platform' : 'FyreCore'} &middot; {label}</em>
+                  </span>
+                </>
+              );
+              const cls = `slot${g.art_url ? ' slot--art' : ''}`;
+              return g.preview
+                ? <div className={cls} key={g.slug}>{body}</div>
+                : <Link href={`/games/${g.slug}`} className={cls} key={g.slug}>{body}</Link>;
+            })}
           </div>
         </div>
       </section>
